@@ -1,0 +1,381 @@
+<!-- BROWSER VIEW <ion-row id="finalize-products" *ngIf="plt.is('desktop')"> -->
+<ion-col id="finalize-products">
+  <!-- Headers -->
+  <div style="width: 100%;">
+    <ion-item lines="none">
+      <ion-col class="align-self-center" size-xl="1" size-lg="2" size-md="2" size-sm="2" size="2" class="ion-text-center">
+        <!-- Name -->
+      </ion-col>
+
+      <ion-col class="align-self-center" size-xl="4" size-lg="4" size-md="4" size-sm="4" size="4" class="ion-text-center">
+        <!-- Image -->
+      </ion-col>
+
+      <ion-col class="align-self-center" size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2" class="ion-text-center">
+        <!-- Colour -->
+      </ion-col>
+
+      <ion-col class="align-self-center" size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2" class="ion-text-center">
+        <!-- Price -->
+      </ion-col>
+
+      <ion-col class="align-self-center" class="ion-text-center">
+        <!-- ++ -->
+      </ion-col>
+
+      <ion-col class="align-self-center" size-xl="2" size-lg="2" size-md="2" size-sm="2" size="2" class="ion-text-center">
+        <!-- Sizing -->
+      </ion-col>
+
+      <ion-col class="align-self-center" class="ion-text-center">
+        <!-- -- -->
+      </ion-col>
+
+      <ion-col class="align-self-center" size-xl="1" size-lg="2" size-md="2" size-sm="2" size="2" class="ion-text-center">
+        <!-- Rating -->
+      </ion-col>
+
+      <ion-col class="align-self-center" size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2" class="ion-text-center">
+        Units
+      </ion-col>
+
+      <ion-col class="align-self-center" size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2" class="ion-text-center">
+        Spend($)
+      </ion-col>
+    </ion-item>
+  </div>
+
+  <!-- Items -->
+  <div *ngFor="let product of stack.products; let j = index" [ngClass]="{ 'no-padding': showOverlay }" style="width: 100%">
+    <ion-item
+      *ngFor="let variantOption of stack.stacksProducts.get(product.id).variants.get(loopAroundVariant); let i = index"
+      [ngClass]="{ 'no-padding expose': showOverlay && i == 0 && j == 0 }"
+    >
+      <!-- Name -->
+      <ion-col
+        class="ion-text-center"
+        align-self-center
+        size-xl="1"
+        size-lg="2"
+        size-md="2"
+        size-sm="2"
+        size="2"
+        style="white-space: normal; font-size: 14px; cursor: pointer"
+        (click)="showProductDetails(product)"
+      >
+        <span *ngIf="stack.stacksProducts.get(product.id).title" class="product-title"
+          >{{ stack.stacksProducts.get(product.id).title }}
+        </span>
+        <span *ngIf="!stack.stacksProducts.get(product.id).title" class="product-title">{{ product.title }}</span>
+      </ion-col>
+
+      <!-- Images -->
+      <ion-col
+        class="ion-text-center"
+        align-self-center
+        size-xl="4"
+        size-lg="4"
+        size-md="4"
+        size-sm="4"
+        size="4"
+        style="cursor: pointer"
+        (click)="showProductDetails(product)"
+      >
+        <div *ngFor="let image of product.images" style="display: inline; white-space:normal;">
+          <img src="{{ image.src }}" style="width: 30%;" imageViewer />
+        </div>
+      </ion-col>
+
+      <!-- Color -->
+      <ion-col class="ion-text-center" align-self-center size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2"
+        >{{ variantOption }}
+      </ion-col>
+
+      <!-- Price -->
+      <ion-col class="ion-text-center" align-self-center size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2">
+        {{ stack.stacksProducts.get(product.id).price | currency: stack.currency }}
+      </ion-col>
+
+      <!-- Size Run (--) -->
+      <ion-col class="ion-text-center, col-center" (click)="sizeRunRemove(product.id, variantOption)">
+        <ion-icon name="remove-circle-outline"></ion-icon>
+      </ion-col>
+
+      <!-- Sizes -->
+      <ion-col
+        class="ion-text-center"
+        align-self-center
+        size-xl="2"
+        size-lg="2"
+        size-md="2"
+        size-sm="2"
+        size="2"
+        [ngClass]="{ 'expose-inn': i == 0 && j == 0 && showOverlay }"
+        (click)="removeOverlay()"
+      >
+        <div *ngFor="let name of otherVariants">
+          <ion-row *ngFor="let data of stack.stacksProducts.get(product.id).variants.get(name)" nowrap>
+            <vaadin-integer-field
+              label="{{ data }}, unavailable"
+              *ngIf="!quantitysAvailable.get(product.id + '-' + variantOption + '-' + data)"
+              value="0"
+              min="0"
+              max="0"
+              disabled
+              has-controls
+              class="quantity-picker"
+            ></vaadin-integer-field>
+            <vaadin-integer-field
+              label="{{ data }}, available: {{ quantitysAvailable.get(product.id + '-' + variantOption + '-' + data) }}"
+              *ngIf="quantitysAvailable.get(product.id + '-' + variantOption + '-' + data)"
+              value="{{ quantitys.get(product.id + '-' + variantOption + '-' + data) }}"
+              min="0"
+              max="{{ quantitysAvailable.get(product.id + '-' + variantOption + '-' + data) }}"
+              has-controls
+              class="quantity-picker"
+              (change)="setQuantity(product.id, variantOption, data, $event)"
+            ></vaadin-integer-field>
+          </ion-row>
+        </div>
+
+        <div *ngIf="i == 0 && j == 0 && showOverlay" class="speech-bubble speech-bubble-expose">
+          <p>
+            <b>Click or tap the</b>
+            <br />
+            <b>size box to start</b>
+          </p>
+
+          <ion-icon name="close" style="position: absolute; top: 0; right: 0; margin: 0.2em;"> </ion-icon>
+        </div>
+      </ion-col>
+
+      <!-- Size Run (--) -->
+      <ion-col class="ion-text-center col-center" (click)="sizeRunAdd(product.id, variantOption)">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-col>
+
+      <!-- Rating
+        onHover)="handleRatingHover($event)"
+        (onLeave)="handleRatingLeave($event)"
+      -->
+      <ion-col class="ion-text-center" align-self-center size-xl="1" size-lg="2" size-md="2" size-sm="2" size="2">
+        <ngb-rating max="5" (rateChange)="handleRatingClick(product.id, variantOption, $event)">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+      </ion-col>
+
+      <!-- Avalaible Units product.modified.units ? product.modified.units : -->
+      <ion-col class="ion-text-center" align-self-center size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2">
+        {{ quantitysPerProduct.get(product.id + '-' + variantOption) }}
+      </ion-col>
+
+      <!-- Spend product.modified.spend ? product.modified.spend : -->
+      <ion-col class="ion-text-center" align-self-center size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2">
+        {{ totalPerProduct.get(product.id + '-' + variantOption) | currency: stack.currency }}
+      </ion-col>
+    </ion-item>
+  </div>
+  <ion-row>
+    <ion-col align-self-center class="ion-text-right" *ngIf="!previewMode">
+      <ion-button mode="ios" class="green-btn" (click)="next()">Order <ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-col>
+
+<!-- Products Listings For MOBILE VIEW
+<ion-row class="mobile-view" *ngIf="plt.is('mobillle')">
+  <ion-col>
+    <ion-list style="padding-top: 0.5em;width:100%;" [ngClass]="{ 'expose no-padding': showOverlay }">
+      <ion-item
+        *ngFor="let product of products; let j = index"
+        lines="none"
+        [ngClass]="{ 'no-padding': showOverlay }"
+        style="height: 100%; border-bottom: 2px solid var(--cust-grayText);"
+      >
+        <div *ngIf="product.modified.mergedImagesColors.length == 0" style="width: 100%">
+          <ion-row
+            *ngFor="let data of product.modified.selectedColors; let i = index"
+            [ngClass]="{ 'even-row': i % 2 == 0, 'odd-row': i % 2 != 0 }"
+          >
+
+            <ion-col class="ion-text-center" size="12" style="white-space: normal;">{{ product.title }}</ion-col>
+
+            <ion-col class="ion-text-center" size="12">
+              <img src="{{ product.images[i].src }}" />
+            </ion-col>
+
+
+            <ion-col class="ion-text-center" size="12">
+              <ion-row>
+
+                <ion-col
+                  class="ion-text-center"
+                  align-self-center
+                  size-xl="1"
+                  size-lg="1"
+                  size="1"
+                  (click)="sizeRunAdd(j, i, product, data.color)"
+                  style="cursor: pointer; white-space: nowrap;"
+                >
+                  ++
+
+                </ion-col>
+
+                <ion-col
+                  size-xl="2"
+                  size-lg="2"
+                  size-md="3"
+                  size-sm="3"
+                  size="3"
+                  *ngFor="let ssData of product.modified.selectedSizesNew"
+                  align-self-center
+                >
+                  <ion-button
+                    fill="outline"
+                    class="size-btn"
+                    style="max-width: 30%;height: 2em;"
+                    *ngIf="ssData.size != '*'"
+                    (click)="askQuantity($event, product, ssData.size, data.color)"
+                  >
+                    <span *ngFor="let qc of ssData.quant_colors">
+                      <span *ngIf="ssData.size && qc.color == data.color && qc.quantity == 0">{{ ssData.size }}</span>
+
+                      <span *ngIf="ssData.size && qc.color == data.color && qc.quantity != 0">{{ qc.quantity }}</span>
+                    </span>
+                  </ion-button>
+                </ion-col>
+
+
+                <ion-col
+                  class="ion-text-center"
+                  align-self-center
+                  size-xl="1"
+                  size-lg="1"
+                  size="1"
+                  (click)="sizeRunRemove(j, i, product, data.color)"
+                  style="cursor: pointer;"
+                >
+                  --
+
+                </ion-col>
+              </ion-row>
+            </ion-col>
+
+
+          </ion-row>
+        </div>
+
+        <div *ngIf="product.modified.mergedImagesColors.length > 0" style="width: 100%">
+          <ion-row
+            *ngFor="let data of product.modified.mergedImagesColors; let i = index"
+            [ngClass]="{ 'even-row': i % 2 == 0, 'odd-row': i % 2 != 0, 'overlay-wrap-inn': i == 0 && showOverlay }"
+          >
+
+            <ion-col class="ion-text-center" align-self-center size="12" style="white-space: normal; font-size: 14px;">
+              <h3>{{ product.title }}</h3>
+            </ion-col>
+
+
+            <ion-col class="ion-text-center" align-self-center size="12">
+              <img src="{{ data.image }}" />
+            </ion-col>
+
+            <ion-col
+              class="ion-text-center"
+              align-self-center
+              size="12"
+              [ngClass]="{ 'expose-inn': j == 0 && showOverlay }"
+              (click)="removeOverlay()"
+            >
+              <ion-row>
+
+                <ion-col
+                  class="ion-text-center"
+                  align-self-center
+                  size-xl="1"
+                  size-lg="1"
+                  size="1"
+                  (click)="sizeRunAdd(j, i, product, data.color)"
+                  style="cursor: pointer; white-space: nowrap;"
+                >
+                  ++
+
+                </ion-col>
+
+                <ion-col
+                  size-xl="2"
+                  size-lg="2"
+                  size-md="3"
+                  size-sm="3"
+                  size="2"
+                  *ngFor="let ssData of product.modified.selectedSizesNew"
+                  align-self-center
+                >
+                  <ion-button
+                    fill="outline"
+                    class="size-btn"
+                    *ngIf="ssData.size != '*'"
+                    (click)="askQuantity($event, product, ssData.size, data.color)"
+                  >
+                    <span *ngFor="let qc of ssData.quant_colors">
+                      <span *ngIf="ssData.size && qc.color == data.color && qc.orderedQuantity == 0">{{ ssData.size }}</span>
+
+                      <span *ngIf="ssData.size && qc.color == data.color && qc.orderedQuantity != 0">{{ qc.orderedQuantity }}</span>
+                    </span>
+                  </ion-button>
+                </ion-col>
+
+
+                <ion-col
+                  class="ion-text-center"
+                  align-self-center
+                  size-xl="1"
+                  size-lg="1"
+                  size="1"
+                  (click)="sizeRunRemove(j, i, product, data.color)"
+                  style="cursor: pointer;"
+                >
+                  --
+
+                </ion-col>
+              </ion-row>
+
+              <div *ngIf="j == 0 && showOverlay" class="speech-bubble speech-bubble-expose">
+                <p>
+                  <b>Click or tap the</b>
+                  <br />
+                  <b>size box to start</b>
+                </p>
+              </div>
+            </ion-col>
+
+            <ion-col class="ion-text-center" align-self-center size="12">
+              <rating
+                [(ngModel)]="rating"
+                [max]="5"
+                iconClass="star-icon"
+                fullIcon="★"
+                emptyIcon="☆"
+                [readonly]="false"
+                [disabled]="false"
+                [required]="false"
+                [float]="true"
+                [titles]="false"
+                (onHover)="handleRatingHover($event)"
+                (onLeave)="handleRatingLeave($event)"
+                (click)="handleRatingClick($event)"
+              >
+              </rating>
+
+
+            </ion-col>
+
+          </ion-row>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-col>
+</ion-row>
+ -->

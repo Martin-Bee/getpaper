@@ -1,0 +1,49 @@
+<ion-card>
+  <div *ngIf="displayManual; then displayFull; else basic"></div>
+
+  <ng-template #displayFull>
+    <ion-card-content>
+      <address-input [address]="address" [message]="message" (setManualAddress)="getManualAddress($event)"></address-input>
+    </ion-card-content>
+  </ng-template>
+
+  <ng-template #basic>
+    <ion-card-header>
+      <ion-card-title>Add a new address</ion-card-title>
+      <ion-card-subtitle>
+        Set a name for this address for you to remember<br />
+        <ion-text color="danger" *ngIf="hasError">Please enter a recipient and an address.</ion-text>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="checkmark" slot="start"></ion-icon>
+        <ion-label position="stacked">Address Label</ion-label>
+        <ion-input placeholder="Enter Label" [(ngModel)]="label"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-label position="stacked">Recipient</ion-label>
+        <ion-input required placeholder="Enter Recipient Name" [(ngModel)]="recipient" (keyup)="capitalize()"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label position="stacked">Address</ion-label>
+        <ion-input placeholder="Enter Address" type="text" [(ngModel)]="autocompleteInput" #addresstext></ion-input>
+        <ion-button fill="clear" slot="end" (click)="addManualAddress()">Can't find your address?</ion-button>
+      </ion-item>
+      <ion-item class="ion-padding" lines="none">
+        <ion-buttons>
+          <ion-button fill="outline" (click)="cancel()">
+            <ion-icon name="close" slot="start"></ion-icon>
+            Cancel
+          </ion-button>
+          <ion-button fill="outline" (click)="addOrUpdateLocation()" style="padding-left:20px">
+            <ion-icon name="save" slot="start"></ion-icon>
+            {{ button }}
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card-content>
+  </ng-template>
+</ion-card>

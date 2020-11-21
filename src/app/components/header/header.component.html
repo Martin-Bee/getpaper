@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear">
+        <!--  style="min-width: 150px" -->
+        <img class="header-logo-img" src="../../assets/logo/logo.png" />
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="buttonVisible">
+      <div *ngIf="screenSize <= 2">
+        <ion-button (click)="openHeaderMenu()">
+          <ion-icon name="menu" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div *ngIf="screenSize > 2">
+        <ion-button fill="clear" class="cust-signup-header-btn">Why GetPaper?</ion-button>
+        <ion-button fill="clear" class="cust-signup-header-btn">Pricing</ion-button>
+        <ion-button fill="clear" class="cust-signup-header-btn">About Us</ion-button>
+        <ion-button fill="clear" class="cust-signup-header-btn">Find your Stack</ion-button>
+
+        <ion-button fill="clear" class="cust-signup-header-btn cust-btn-outline">Create a Stack</ion-button>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

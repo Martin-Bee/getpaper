@@ -1,0 +1,27 @@
+.cust-col {
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  padding: 15px;
+
+  .cust-input {
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: lightgray;
+    --border-radius: 2px;
+    margin-top: 1em;
+    background-color: rgb(225, 246, 253);
+  }
+
+  .forgot-btn {
+    cursor: pointer;
+  }
+
+  .signup-btn {
+    color: #3171e0;
+    cursor: pointer;
+  }
+
+  .signin-text {
+    font-size: 16px;
+  }
+}

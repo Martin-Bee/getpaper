@@ -1,0 +1,14 @@
+<app-option-menu title="Connect with Stripe" subTitle="Get paid using stripe"></app-option-menu>
+
+<ion-content>
+  <ion-item *ngIf="loading" style="width: 70%;" lines="none">
+    <ion-label color="primary">Connecting with Stripe ...</ion-label>
+    <ion-spinner name="dots" color="primary"></ion-spinner>
+  </ion-item>
+  <ion-item *ngIf="errorMessage">
+    <ion-label color="danger">{{ errorMessage }}</ion-label>
+  </ion-item>
+  <ion-item *ngIf="successful">
+    <ion-label color="success">Stripe was successfully connected to your account. You can now close this tab!</ion-label>
+  </ion-item>
+</ion-content>

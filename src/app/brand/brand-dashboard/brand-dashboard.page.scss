@@ -1,0 +1,377 @@
+ion-content {
+  #wrap {
+    // width: 80%;
+    p {
+      text-align: center;
+      color: #929292;
+    }
+
+    cursor: pointer;
+  }
+
+  #icon-wrapper {
+    width: 100%;
+    height: auto;
+    border: 0.5px solid #222;
+    border-radius: 10px;
+    text-align: center;
+    padding: 35% 1%;
+
+    ion-icon {
+      font-size: 5em;
+    }
+  }
+
+  #new-prod-types {
+    font-family: Helvetica !important;
+
+    ion-row {
+      // margin-bottom: 4em;
+      margin-bottom: 2em;
+
+      .add-new-product-label {
+        // text-align: right !important;
+        font-size: 1.5em;
+      }
+
+      .add-new-product-btn {
+        // --width: 65%;
+        // font-size: 1.2em;
+        --background: var(--cust-signupBtn);
+        --border-radius: 6px;
+        font-weight: bold;
+      }
+
+      .add-new-product-btn-sub-txt {
+        color: #929292;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+.overlay-wrap {
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99998;
+}
+
+.expose {
+  position: relative;
+  z-index: 99999;
+  background-color: #fff;
+}
+
+.speech-bubble {
+  position: relative;
+  background-color: #00a2ff;
+  color: #fff;
+  border-radius: 0.4em;
+  margin-left: 1em;
+  padding: 0.1em 0.5em;
+  font-family: Helvetica;
+}
+
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 64%;
+  width: 0;
+  height: 0;
+  border: 16px solid transparent;
+  border-right-color: #00a2ff;
+  border-left: 0;
+  margin-top: -20px;
+  margin-left: -16px;
+}
+
+.speech-bubble2 {
+  position: relative;
+  background-color: #00a2ff;
+  color: #fff;
+  border-radius: 0.4em;
+  margin-left: 1em;
+  padding: 0.1em 0.5em;
+  font-family: Helvetica;
+}
+
+.speech-bubble2:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 64%;
+  width: 0;
+  height: 0;
+  border: 16px solid transparent;
+  border-right-color: #00a2ff;
+  border-left: 0;
+  margin-top: -20px;
+  margin-left: -16px;
+}
+
+ion-button {
+  width: 65%;
+  --width: 100%;
+}
+
+.sho-cre-err {
+  color: var(--cust-danger);
+}
+
+// Media Queries
+// 450px 576px 768px 992px 1200px
+@media only screen and (max-width: 450px) {
+  ion-title {
+    .toolbar-title {
+      text-align: center;
+    }
+  }
+
+  ion-content {
+    #icon-wrapper {
+      ion-icon {
+        font-size: 3em;
+      }
+    }
+
+    .speech-bubble {
+      position: relative;
+      background-color: #00a2ff;
+      color: #fff;
+      border-radius: 0.4em;
+      margin-left: 1em;
+      padding: 0.1em 0.5em;
+      font-family: Helvetica;
+      font-size: 0.7em;
+    }
+
+    .speech-bubble:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 64%;
+      width: 0;
+      height: 0;
+      border: 16px solid transparent;
+      border-right-color: #00a2ff;
+      border-left: 0;
+      margin-top: -20px;
+      margin-left: -16px;
+    }
+
+    .speech-bubble2 {
+      margin-top: 1em;
+      left: 0;
+    }
+
+    .speech-bubble2:after {
+      content: '';
+      position: absolute;
+      left: 86%;
+      top: 0;
+      width: 0;
+      height: 0;
+      border: 16px solid transparent;
+      border-right-color: #00a2ff;
+      border-left: 0;
+      margin-top: -20px;
+      margin-left: -16px;
+      transform: rotate(90deg);
+    }
+
+    #add-shopify-store {
+      .shopify-heading {
+        font-size: 1.4em;
+        font-weight: bold;
+      }
+
+      .shopify-label {
+        line-height: 3em;
+        font-size: 1.2em;
+        text-align: left !important;
+      }
+
+      .shopify-http {
+        font-size: 0.7em !important;
+        color: darkgray;
+      }
+
+      .shopify-com {
+        font-size: 0.7em !important;
+        color: darkgray;
+      }
+
+      .shopify-input {
+        // line-height: 3em;
+        ion-input {
+          border: 1px solid lightgray;
+          border-radius: 5px;
+
+          input {
+            height: 3em;
+            padding-left: 8px;
+            margin: 0 !important;
+            font-size: 1.2em;
+          }
+        }
+
+        p {
+          line-height: 1em;
+          color: #929292;
+          font-weight: bold;
+        }
+      }
+
+      .shopify-btn-col {
+        text-align: right !important;
+
+        .shopify-btn {
+          --background: var(--cust-signupBtn);
+          --height: 2.5em;
+          --border-radius: 6px;
+          --width: auto;
+          line-height: 3em;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  ion-title {
+    .toolbar-title {
+      text-align: center;
+    }
+  }
+
+  ion-content {
+    #icon-wrapper {
+      ion-icon {
+        font-size: 3em;
+      }
+    }
+
+    .speech-bubble2 {
+      margin-top: 1em;
+      left: 0;
+    }
+
+    .speech-bubble2:after {
+      content: '';
+      position: absolute;
+      left: 86%;
+      top: 0;
+      width: 0;
+      height: 0;
+      border: 16px solid transparent;
+      border-right-color: #00a2ff;
+      border-left: 0;
+      margin-top: -20px;
+      margin-left: -16px;
+      transform: rotate(90deg);
+    }
+
+    #add-shopify-store {
+      .shopify-heading {
+        font-size: 1.4em;
+        font-weight: bold;
+      }
+
+      .shopify-label {
+        line-height: 3em;
+        font-size: 1.2em;
+        text-align: left !important;
+      }
+
+      .shopify-input {
+        // line-height: 3em;
+        ion-input {
+          border: 1px solid lightgray;
+          border-radius: 5px;
+
+          input {
+            height: 3em;
+            padding-left: 8px;
+            margin: 0 !important;
+            font-size: 1.2em;
+          }
+        }
+
+        p {
+          line-height: 1em;
+          color: #929292;
+          font-weight: bold;
+        }
+      }
+
+      .shopify-btn-col {
+        text-align: right !important;
+
+        .shopify-btn {
+          --background: var(--cust-signupBtn);
+          --height: 2.5em;
+          --border-radius: 6px;
+          --width: auto;
+          line-height: 3em;
+          width: auto;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ion-title {
+    .toolbar-title {
+      text-align: center;
+    }
+  }
+
+  .speech-bubble2 {
+    margin-top: 1em;
+    left: 50%;
+  }
+
+  .speech-bubble2:after {
+    content: '';
+    position: absolute;
+    left: 86%;
+    top: 0;
+    width: 0;
+    height: 0;
+    border: 16px solid transparent;
+    border-right-color: #00a2ff;
+    border-left: 0;
+    margin-top: -20px;
+    margin-left: -16px;
+    transform: rotate(90deg);
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .speech-bubble2 {
+    margin-top: 1em;
+    left: 50%;
+  }
+
+  .speech-bubble2:after {
+    content: '';
+    position: absolute;
+    left: 86%;
+    top: 0;
+    width: 0;
+    height: 0;
+    border: 16px solid transparent;
+    border-right-color: #00a2ff;
+    border-left: 0;
+    margin-top: -20px;
+    margin-left: -16px;
+    transform: rotate(90deg);
+  }
+}

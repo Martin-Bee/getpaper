@@ -1,0 +1,30 @@
+/* Enable push notification */
+#pe-overlay-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2147483638;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#pe-overlay-backdrop #pe-overlay-text {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  max-width: 315px;
+  color: white;
+  font-size: larger;
+}
+
+#pe-overlay-backdrop #pe-overlay-arrow {
+  width: 60px;
+  height: 80px;
+  background-size: contain;
+  transform: rotate(160deg);
+  background-image: url(src/assets/img/arrow1.png);
+  background-repeat: no-repeat;
+}

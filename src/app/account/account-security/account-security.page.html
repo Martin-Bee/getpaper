@@ -1,0 +1,100 @@
+<app-option-menu title="Account Security" subTitle="Update your account security"></app-option-menu>
+
+<ion-content class="ion-padding">
+  <div *ngIf="user != null; else elseBlock"></div>
+
+  <!-- UPDATE EMAIL WIDGET -->
+  <ion-card [ngSwitch]="display">
+    <div *ngSwitchCase="'update-email'">
+      <ion-card-header>
+        <ion-card-title>Update your email</ion-card-title>
+        <ion-card-subtitle>
+          Enter your new email, Current email: {{ user.email }}
+          <ion-text color="danger" *ngIf="hasError">Please enter a valid email and current valid password.</ion-text>
+        </ion-card-subtitle>
+        <ion-item class="activated">
+          <ion-icon name="at" slot="start"></ion-icon>
+          <ion-input [(ngModel)]="newEmail" required type="text" placeholder="New Email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="key" slot="start"></ion-icon>
+          <ion-input [(ngModel)]="password" required type="password" placeholder="Current password"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-buttons>
+            <ion-button fill="outline" (click)="cancel()">
+              <ion-icon name="close" slot="start"></ion-icon>
+              Cancel
+            </ion-button>
+            <ion-button fill="outline" (click)="updateNewEmail()" style="padding-left:20px">
+              <ion-icon name="save" slot="start"></ion-icon>
+              Update Email
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-card-header>
+    </div>
+
+    <!-- UPDATE PASSWORD WIDGET -->
+    <div *ngSwitchCase="'update-password'">
+      <ion-card-header>
+        <ion-card-title>Update your password</ion-card-title>
+        <ion-card-subtitle>
+          Enter your old and new password
+          <ion-text color="danger" *ngIf="hasError">
+            Please enter a valid current password, new password must be at least 6 characters.
+          </ion-text>
+        </ion-card-subtitle>
+        <ion-item>
+          <ion-label position="stacked"></ion-label>
+          <ion-input [(ngModel)]="password" required type="password" placeholder="Old Password"></ion-input>
+          <ion-input [(ngModel)]="newPassword" required type="password" placeholder="New Password"></ion-input>
+          <ion-input [(ngModel)]="confirmPassword" required type="password" placeholder="Confirm new Password"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-buttons>
+            <ion-button fill="outline" (click)="cancel()">
+              <ion-icon name="close" slot="start"></ion-icon>
+              Cancel
+            </ion-button>
+            <ion-button fill="outline" (click)="updateNewPassword()" style="padding-left:20px">
+              <ion-icon name="save" slot="start"></ion-icon>
+              Update Password
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+      </ion-card-header>
+    </div>
+
+    <!-- MAIN VIEW -->
+    <div *ngSwitchDefault>
+      <div *ngIf="user != null; else elseBlock">
+        <ion-card-header>
+          <ion-card-title>{{ user.email }}</ion-card-title>
+          <ion-card-subtitle>{{ user.companyName }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-item class="activated">
+            <ion-icon name="at" slot="start"></ion-icon>
+            <ion-label>{{ user.email }}</ion-label>
+            <ion-button fill="clear" slot="end" (click)="updateEmail()">
+              <ion-icon slot="start" name="create"></ion-icon>
+              Update Email
+            </ion-button>
+          </ion-item>
+          <ion-item class="activated">
+            <ion-icon name="key" slot="start"></ion-icon>
+            <ion-label>*******</ion-label>
+            <ion-button fill="clear" slot="end" (click)="updatePassword()">
+              <ion-icon slot="start" name="create"></ion-icon>
+              Update Password
+            </ion-button>
+          </ion-item>
+        </ion-card-content>
+      </div>
+    </div>
+  </ion-card>
+
+  <ng-template #elseBlock>We are loading your information... </ng-template>
+</ion-content>

@@ -1,0 +1,5 @@
+<app-header buttonVisible="{{ this.showButtons }}"></app-header>
+<ion-content class="ion-padding">
+  <signup (showButtons)="getShowButtons($event)" [simpleVersion]="false"></signup>
+</ion-content>
+<app-footer></app-footer>

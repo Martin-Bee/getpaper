@@ -1,0 +1,24 @@
+<!-- Generated template for the GetProductQuantityComponent component -->
+<div>
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" class="ion-align-self-center">
+          <ion-item lines="none">
+            <ion-label>Qty</ion-label>
+            <ion-input type="number" autofocus="true" [(ngModel)]="quantity" min="1" max="50"></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="2" class="ion-align-self-center">
+          {{ size }}
+        </ion-col>
+
+        <ion-col size="3" class="ion-align-self-center">
+          <ion-button mode="ios" round medium (click)="close()">Go</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  <ion-icon name="close" class="cust-close-icon" (click)="close(true)"></ion-icon>
+</div>

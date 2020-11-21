@@ -1,0 +1,45 @@
+<address-autocomplete-component
+  (setAddress)="getAddress($event)"
+  addressType="address"
+  *ngIf="action == 'add-address'"
+></address-autocomplete-component>
+
+<ion-card *ngIf="action != 'add-address'">
+  <ion-card-header>
+    <ion-card-title>Addresses</ion-card-title>
+    <ion-card-subtitle>These are the addresses we have on file.</ion-card-subtitle>
+  </ion-card-header>
+  <div *ngIf="user.addresses && user.addresses.length >= 1; then displayAddress; else noAddress"></div>
+  <ng-template #displayAddress>
+    <ion-item *ngFor="let item of user.addresses">
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>
+        <strong>{{ item.label }}</strong>
+        <span *ngIf="item.label"> - </span>
+        {{ item.recipient }} {{ item.display }}
+      </ion-label>
+      <div>
+        <ion-button slot="end" class="green-btn" (click)="useAddress(item)">
+          <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+          Ship to this address
+        </ion-button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-button fill="clear" slot="end" (click)="addAddress()">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        Add a new Address
+      </ion-button>
+    </ion-item>
+  </ng-template>
+  <ng-template #noAddress>
+    <ion-item>
+      <ion-icon name="pin" slot="start"></ion-icon>
+      <ion-label>We don't have any address for you</ion-label>
+      <ion-button fill="clear" slot="end" (click)="addAddress()">
+        <ion-icon slot="start" name="add-outline"></ion-icon>
+        Add a new Address
+      </ion-button>
+    </ion-item>
+  </ng-template>
+</ion-card>

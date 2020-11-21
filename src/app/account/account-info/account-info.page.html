@@ -1,0 +1,168 @@
+<app-option-menu title="Account Information" subTitle="Edit your profile"></app-option-menu>
+
+<ion-content class="ion-padding">
+  <div *ngIf="user != null; else elseBlock">
+    <div *ngIf="action == 'add-address'; then displayAddAddress else next"></div>
+
+    <ng-template #displayAddAddress>
+      <address-autocomplete-component
+        (setAddress)="getAddress($event)"
+        addressType="address"
+        [addressToUpdate]="addressToUpdate"
+      ></address-autocomplete-component>
+    </ng-template>
+
+    <ng-template #next>
+      <div *ngIf="action == 'add-store'; then displayAddStore else basic"></div>
+    </ng-template>
+
+    <ng-template #displayAddStore>
+      <shopify-setup [asNew]="newStore" (setStore)="getShopifyStore($event)"></shopify-setup>
+    </ng-template>
+
+    <ng-template #basic>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ user.fullName }}</ion-card-title>
+          <ion-card-subtitle>{{ user.companyName }}</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          Thank you for using GetPaper. Placeholder with text.
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="card-spacing">
+        <ion-card-header>
+          <ion-card-title>Settings</ion-card-title>
+          <ion-card-subtitle>This is the email where we can contact you and email you forms and information</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item class="activated">
+            <ion-icon name="at" slot="start"></ion-icon>
+            <ion-label>{{ user.email }}</ion-label>
+            <ion-button fill="clear" slot="end" (click)="changeEmail()">
+              <ion-icon slot="start" name="create"></ion-icon>
+              Change Email
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="cog" slot="start"></ion-icon>
+            <ion-label>{{ user.type === 'buyer' ? 'I am here to buy' : 'I am here to sell' }}</ion-label>
+            <ion-button fill="clear" slot="end" (click)="switchType()">
+              <ion-icon slot="start" name="swap-horizontal-outline"></ion-icon>
+              Switch
+            </ion-button>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="card-spacing">
+        <ion-card-header>
+          <ion-card-title>Stripe Connect</ion-card-title>
+          <ion-card-subtitle>Get paid directly using Stripe.</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <stripe-connect></stripe-connect>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="card-spacing">
+        <ion-card-header>
+          <ion-card-title>Shopify Stores</ion-card-title>
+          <ion-card-subtitle>List of all the shopify stores linked with our app.</ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <div *ngIf="stores && stores.length >= 1; then displayStores else noStores"></div>
+          <ng-template #displayStores>
+            <ion-item *ngFor="let item of stores">
+              <ion-icon name="logo-skype" slot="start"></ion-icon>
+              <strong>{{ item.id }}</strong>.myshopify.com
+              <ion-text slot="end" color="success" *ngIf="item.token && item.token !== 'not_set'">
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                All Good.
+              </ion-text>
+              <ion-text slot="end" color="warning" *ngIf="item.token && item.token === 'not_set'">
+                <ion-icon name="close-circle-outline"></ion-icon>
+                App not installed.
+              </ion-text>
+              <ion-button
+                fill="clear"
+                slot="end"
+                size="small"
+                (click)="finishSetupStore(item)"
+                *ngIf="item.token && item.token === 'not_set'"
+              >
+                <ion-icon slot="end" name="sync"></ion-icon>
+                Fix Setup
+              </ion-button>
+              <ion-button fill="clear" slot="end" size="small" (click)="deleteStore(item)">
+                <ion-icon slot="start" name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
+            <ion-item>
+              <ion-button fill="clear" slot="end" (click)="addStore()">
+                <ion-icon slot="start" name="add-outline"></ion-icon>
+                Link a new Store
+              </ion-button>
+            </ion-item>
+          </ng-template>
+          <ng-template #noStores>
+            <ion-item>
+              <ion-icon name="pin" slot="start"></ion-icon>
+              <ion-label>We don't have any store for you</ion-label>
+              <ion-button fill="clear" slot="end" (click)="addStore()">
+                <ion-icon slot="start" name="add-outline"></ion-icon>
+                Link a new Store
+              </ion-button>
+            </ion-item>
+          </ng-template>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="card-spacing">
+        <ion-card-header>
+          <ion-card-title>Addresses</ion-card-title>
+          <ion-card-subtitle>These are the addresses we have on file.</ion-card-subtitle>
+        </ion-card-header>
+        <div *ngIf="user.addresses && user.addresses.length >= 1; then displayAddress else noAddress"></div>
+        <ng-template #displayAddress>
+          <ion-item *ngFor="let item of user.addresses">
+            <ion-icon name="pin" slot="start"></ion-icon>
+            <ion-label>
+              <strong>{{ item.label }}</strong>
+              <span *ngIf="item.label"> - </span>
+              {{ item.recipient }} {{ item.display }}
+            </ion-label>
+            <div>
+              <ion-button fill="clear" slot="end" size="small" (click)="changeAddress(item)">
+                <ion-icon slot="start" name="create"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" slot="end" size="small" (click)="deleteAddress(item)">
+                <ion-icon slot="start" name="trash"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-item>
+          <ion-item>
+            <ion-button fill="clear" slot="end" (click)="addAddress()">
+              <ion-icon slot="start" name="add-outline"></ion-icon>
+              Add a new Address
+            </ion-button>
+          </ion-item>
+        </ng-template>
+        <ng-template #noAddress>
+          <ion-item>
+            <ion-icon name="pin" slot="start"></ion-icon>
+            <ion-label>We don't have any address for you</ion-label>
+            <ion-button fill="clear" slot="end" (click)="addAddress()">
+              <ion-icon slot="start" name="add-outline"></ion-icon>
+              Add a new Address
+            </ion-button>
+          </ion-item>
+        </ng-template>
+      </ion-card>
+    </ng-template>
+  </div>
+  <ng-template #elseBlock>We are loading your information... </ng-template>
+</ion-content>

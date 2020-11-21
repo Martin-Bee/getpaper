@@ -1,0 +1,859 @@
+$gray-text: var(--cust-grayText);
+$font-forms: var(--ion-font-family);
+$font-title: var(--ion-font-family-title);
+
+ion-icon {
+  font-weight: bold;
+}
+
+.button-ios {
+  border-radius: 6px;
+  font-family: $font-title;
+}
+
+.cust-toggle {
+  --background: #b5dda5;
+  --background-checked: #b5dda5;
+  --handle-background: orange;
+  --handle-background-checked: orange;
+}
+
+.left-btn {
+  font-size: 2.5em;
+}
+
+.removeBottomBorder {
+  border: none;
+}
+
+.emailwrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  transform: translateY(30%);
+  margin-top: 5em;
+
+  ion-item {
+    .item-inner {
+      border: 0 !important;
+      font-size: 13px;
+    }
+
+    border: 1px solid #b2b2b2 !important;
+    border-radius: 6px !important;
+    font-family: $font-title;
+    height: 40px;
+  }
+}
+
+.wrapper {
+  max-width: 550px;
+  margin: 0 auto;
+  position: relative;
+  transform: translateY(30%);
+
+  h1 {
+    font-size: 3.5em;
+    text-align: center;
+  }
+
+  p {
+    color: $gray-text;
+    font-size: 1.5em;
+  }
+
+  .intro-text {
+    color: #222;
+  }
+
+  ion-item {
+    /* .item-inner {
+         --border-width: 0 !important;
+         // font-size: 13px
+      } */
+    --padding-bottom: 0.2em;
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: #b2b2b2;
+    --border-radius: 6px;
+    font-family: $font-title;
+
+    ion-input {
+      font-size: 1.1em;
+    }
+  }
+
+  #get-started {
+    --background: var(--cust-primary);
+    --border-radius: 6px;
+    --margin-top: 0;
+    --margin-right: 0;
+    --margin-bottom: 0;
+    --margin-left: 0;
+    --width: 100%;
+    --height: 35px;
+    font-weight: bold;
+    width: 100%;
+    font-size: 16px;
+    // top: 9%;
+  }
+}
+
+.wrapper2 {
+  max-width: 550px;
+  margin: 0 auto;
+  position: relative;
+  transform: translateY(30%);
+
+  #middle-dash {
+    display: inline-block;
+    position: relative;
+    top: -1em;
+    font-size: 3em;
+  }
+
+  h1 {
+    font-size: 3.5em;
+    text-align: center;
+  }
+
+  p {
+    color: $gray-text;
+    font-size: 1.5em;
+  }
+
+  #first-three #last-three {
+    display: inline-block;
+  }
+
+  .code-verify-input {
+    --padding-start: 0;
+    --inner-padding-start: 0;
+    --inner-padding-end: 0;
+    width: 15%;
+    // height: 1.4em;
+    display: inline-block;
+    // font-size: 7em;
+    border: 1px solid gray;
+    // border-radius: 4px;
+    position: relative;
+    text-align: center;
+
+    ion-input {
+      font-size: 7em;
+    }
+  }
+
+  #c1,
+  #c4 {
+    // left: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  #c2,
+  #c5 {
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  #c3,
+  #c6 {
+    // left: -5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .instruction p {
+    font-size: 1.5em;
+    color: gray;
+    margin: 0.5em;
+  }
+
+  .code-match-err {
+    text-align: center;
+    color: var(--cust-custRed);
+  }
+}
+
+.signup-wrapper {
+  // width: 60%;
+  margin: 0 auto;
+
+  h1 {
+    // font-size: 3em;
+    font-size: 42px;
+  }
+
+  p {
+    // font-size: 1.5em;
+    font-size: 21px;
+    color: $gray-text;
+  }
+
+  .name-form,
+  .password-form,
+  .additional-data-form,
+  .company-name-form,
+  .domain-name-form {
+    font-family: $font-forms;
+    font-size: 1.5em;
+    color: #222;
+    padding-bottom: 1em;
+  }
+
+  .type-form {
+    font-family: $font-forms;
+    font-size: 1.2em;
+  }
+
+  .step1 {
+    .cust-check-label {
+      margin: 0;
+    }
+  }
+
+  .step1,
+  .step2,
+  .step4,
+  .step5 {
+    ion-item {
+      margin-top: 3em;
+      --padding-start: 0;
+
+      ion-input {
+        border: 2px solid lightgray !important;
+        border-radius: 10px !important;
+        --padding-start: 1em;
+      }
+    }
+
+    #step1-btn,
+    #step2-btn,
+    #step5-btn {
+      --background: var(--cust-signupBtn);
+      --margin-top: 0;
+      --margin-end: auto;
+      --margin-bottom: 0;
+      --margin-start: auto;
+      --color: #fff;
+      --border-radius: 6px;
+      display: block;
+      text-transform: none;
+    }
+
+    #step2-btn,
+    #step4-btn {
+      --width: 80%;
+    }
+
+    #step4-btn {
+      --background: var(--cust-signupBtn);
+      --color: #fff;
+      --border-radius: 6px;
+      display: block;
+      text-transform: none;
+    }
+
+    #step5-btn {
+      --width: 40%;
+    }
+  }
+
+  .msg {
+    // font-size: 1.4em;
+    font-size: 19.6px;
+
+    font-weight: 600;
+  }
+
+  ng2-password-strength-bar {
+    #strengthBar {
+      margin: 0 !important;
+
+      .point {
+        width: 18.8% !important;
+      }
+    }
+  }
+
+  .step3 {
+    .cust-greydout-label {
+      width: 60%;
+      height: 1.4em;
+      background-color: lightgray;
+      margin-top: 3em;
+      border-radius: 10px;
+    }
+
+    .cust-greydout-input {
+      height: 40px;
+      background-color: lightgray;
+      margin: 1em 7px 0 0;
+      border-radius: 10px;
+    }
+
+    ion-row {
+      margin-right: 8px;
+
+      ion-col {
+        opacity: 0.6;
+      }
+    }
+
+    ion-item {
+      --padding-start: 0;
+      margin-top: 1em;
+
+      ion-select {
+        border: 2px solid $gray-text !important;
+        border-radius: 10px !important;
+        padding-left: 1em;
+      }
+    }
+
+    #manager-y,
+    #manager-n {
+      span {
+        color: #222;
+      }
+
+      button {
+        height: 18px;
+      }
+    }
+
+    ion-button {
+      --background: var(--cust-signupBtn);
+      --margin-top: 1em;
+      --margin-end: auto;
+      --margin-bottom: 1em;
+      --margin-start: auto;
+      --color: #fff;
+      --border-radius: 6px;
+      --width: 80%;
+      display: block;
+      text-transform: none;
+    }
+
+    #manager-y,
+    #manager-n {
+      ion-button {
+        --background: #fff;
+        --color: #222;
+        --margin-top: 0 !important;
+        --margin-end: 0 !important;
+        --margin-bottom: 0 !important;
+        --margin-start: 0 !important;
+        --border-radius: 0 !important;
+        --width: 100% !important;
+      }
+    }
+  }
+}
+
+button[disabled] {
+  background-color: $gray-text !important;
+}
+
+.fab {
+  border-radius: 4px;
+  width: 4em !important;
+  height: 2em !important;
+}
+
+.fab:before {
+  content: ' ';
+  height: 0;
+  position: absolute;
+  width: 0;
+  left: 10px;
+  border: 10px solid transparent;
+  border-right-color: #00bfff;
+  transform: rotate(-90deg);
+}
+
+.arrow-down {
+  position: relative;
+  top: -9px;
+  left: 43px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 14px solid #00bfff;
+}
+
+// Media Queries
+// 576px 768px 992px 1200px
+
+@media only screen and (max-width: 576px) {
+  .wrapper {
+    h1 {
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+  }
+
+  .wrapper2 {
+    h1 {
+      font-size: 2.5em;
+    }
+
+    p {
+      color: $gray-text;
+      font-size: 1.2em;
+    }
+
+    .instruction p {
+      font-size: 1.2em;
+    }
+
+    .code-verify-input {
+      ion-input {
+        font-size: 3.5em;
+      }
+    }
+
+    #middle-dash {
+      display: inline-block;
+      position: relative;
+      top: -0.5em;
+      font-size: 2.5em;
+    }
+  }
+
+  .signup-wrapper {
+    h1 {
+      font-size: 2.1em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    .name-form,
+    .password-form,
+    .additional-data-form,
+    .company-name-form,
+    .domain-name-form {
+      font-size: 1.5em;
+    }
+
+    .step1 {
+      .cust-check-label {
+        font-size: 0.9em;
+      }
+    }
+
+    .step1,
+    .step2,
+    .step4,
+    .step5 {
+      ion-item {
+        margin-top: 3em;
+      }
+
+      #step1-btn,
+      #step2-btn,
+      #step4-btn,
+      #step5-btn {
+        font-size: 1em;
+        --width: 55%;
+      }
+
+      #step2-btn,
+      #step4-btn {
+      }
+
+      #step4-btn {
+      }
+
+      #step5-btn {
+        --width: 40%;
+      }
+    }
+
+    .msg {
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    ng2-password-strength-bar {
+      #strengthBar {
+        margin: 0 !important;
+
+        .point {
+          width: 18.8% !important;
+        }
+      }
+    }
+
+    .step3 {
+      .cust-greydout-label {
+        width: 60%;
+        height: 1.4em;
+        margin-top: 3em;
+      }
+
+      .cust-greydout-input {
+        height: 40px;
+        margin: 1em 7px 0 0;
+      }
+
+      ion-row {
+        margin-right: 8px;
+
+        ion-col {
+          opacity: 0.6;
+        }
+      }
+
+      ion-item {
+        --padding-start: 0;
+        margin-top: 1em;
+
+        ion-select {
+          padding-left: 1em;
+        }
+      }
+
+      ion-button {
+        --margin-top: 1em;
+        --margin-end: auto;
+        --margin-bottom: 1em;
+        --margin-start: auto;
+        --width: 60%;
+        font-size: 1em;
+      }
+
+      #manager-y,
+      #manager-n {
+        ion-button {
+          --margin-top: 0 !important;
+          --margin-end: 0 !important;
+          --margin-bottom: 0 !important;
+          --margin-start: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .wrapper {
+    transform: translateY(5%);
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+  }
+
+  .wrapper2 {
+    h1 {
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    .instruction p {
+      font-size: 1.2em;
+    }
+
+    .code-verify-input {
+      ion-input {
+        font-size: 3.5em;
+      }
+    }
+
+    #middle-dash {
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 2em;
+    }
+  }
+
+  .signup-wrapper {
+    h1 {
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    .name-form,
+    .password-form,
+    .additional-data-form,
+    .company-name-form,
+    .domain-name-form {
+      font-size: 1.5em;
+    }
+
+    .step1 {
+      .cust-check-label {
+        font-size: 0.9em;
+      }
+    }
+
+    .step1,
+    .step2,
+    .step4,
+    .step5 {
+      ion-item {
+        margin-top: 3em;
+      }
+
+      #step1-btn,
+      #step2-btn,
+      #step4-btn,
+      #step5-btn {
+        font-size: 1em;
+        --width: 55%;
+      }
+
+      #step2-btn,
+      #step4-btn {
+      }
+
+      #step4-btn {
+      }
+
+      #step5-btn {
+        --width: 40%;
+      }
+    }
+
+    .msg {
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    ng2-password-strength-bar {
+      #strengthBar {
+        margin: 0 !important;
+
+        .point {
+          width: 18.8% !important;
+        }
+      }
+    }
+
+    .step3 {
+      .cust-greydout-label {
+        width: 60%;
+        height: 1.4em;
+        margin-top: 3em;
+      }
+
+      .cust-greydout-input {
+        height: 40px;
+        margin: 1em 7px 0 0;
+      }
+
+      ion-row {
+        margin-right: 8px;
+
+        ion-col {
+          opacity: 0.6;
+        }
+      }
+
+      ion-item {
+        --padding-start: 0;
+        margin-top: 1em;
+
+        ion-select {
+          padding-left: 1em;
+        }
+      }
+
+      ion-button {
+        --margin-top: 1em;
+        --margin-end: auto;
+        --margin-bottom: 1em;
+        --margin-start: auto;
+        --width: 60%;
+        font-size: 1em;
+      }
+
+      #manager-y,
+      #manager-n {
+        ion-button {
+          --margin-top: 0 !important;
+          --margin-end: 0 !important;
+          --margin-bottom: 0 !important;
+          --margin-start: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .wrapper {
+    transform: translateY(5%);
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+  }
+
+  .wrapper2 {
+    h1 {
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    .instruction p {
+      font-size: 1.2em;
+    }
+
+    .code-verify-input {
+      ion-input {
+        font-size: 3.5em;
+      }
+    }
+
+    #middle-dash {
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 2em;
+    }
+  }
+
+  .signup-wrapper {
+    h1 {
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    .name-form,
+    .password-form,
+    .additional-data-form,
+    .company-name-form,
+    .domain-name-form {
+      font-size: 1.5em;
+    }
+
+    .step1 {
+      .cust-check-label {
+        font-size: 0.9em;
+      }
+    }
+
+    .step1,
+    .step2,
+    .step4,
+    .step5 {
+      ion-item {
+        margin-top: 3em;
+      }
+
+      #step1-btn,
+      #step2-btn,
+      #step4-btn,
+      #step5-btn {
+        font-size: 1em;
+        --width: 55%;
+      }
+
+      #step2-btn,
+      #step4-btn {
+      }
+
+      #step4-btn {
+      }
+
+      #step5-btn {
+        --width: 40%;
+      }
+    }
+
+    .msg {
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    ng2-password-strength-bar {
+      #strengthBar {
+        margin: 0 !important;
+
+        .point {
+          width: 18.8% !important;
+        }
+      }
+    }
+
+    .step3 {
+      .cust-greydout-label {
+        width: 60%;
+        height: 1.4em;
+        margin-top: 3em;
+      }
+
+      .cust-greydout-input {
+        height: 40px;
+        margin: 1em 7px 0 0;
+      }
+
+      ion-row {
+        margin-right: 8px;
+
+        ion-col {
+          opacity: 0.6;
+        }
+      }
+
+      ion-item {
+        --padding-start: 0;
+        margin-top: 1em;
+
+        ion-select {
+          padding-left: 1em;
+        }
+      }
+
+      ion-button {
+        --margin-top: 1em;
+        --margin-end: auto;
+        --margin-bottom: 1em;
+        --margin-start: auto;
+        --width: 60%;
+        font-size: 1em;
+      }
+
+      #manager-y,
+      #manager-n {
+        ion-button {
+          --margin-top: 0 !important;
+          --margin-end: 0 !important;
+          --margin-bottom: 0 !important;
+          --margin-start: 0 !important;
+        }
+      }
+    }
+  }
+}

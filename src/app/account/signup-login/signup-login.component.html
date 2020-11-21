@@ -1,0 +1,18 @@
+<ion-item *ngIf="loading" style="width: 70%;" lines="none">
+  <ion-label color="primary">Checking for stack account ...</ion-label>
+  <ion-spinner name="dots" color="primary"></ion-spinner>
+</ion-item>
+<ion-grid style="height: 100%;" *ngIf="!loading">
+  <ion-row class="ion-align-items-center ion-justify-content-center" style="height: 80%; padding-top: 10px;">
+    <h3>You need to create an account or login to an existing account.</h3>
+  </ion-row>
+  <ion-row class="ion-align-items-center ion-justify-content-center" style="height: 80%; padding-top: 10px;">
+    <a href="javascript:;" (click)="gotoLogin()">I have already an account</a>
+  </ion-row>
+  <ion-row class="ion-align-items-center ion-justify-content-center" style="height: 80%; padding-top: 10px;">
+    <a href="javascript:;" (click)="gotoSignup()">I want to create an account</a>
+  </ion-row>
+</ion-grid>
+
+<signup (showButtons)="getShowButtons()" [simpleVersion]="true" *ngIf="action == 'signup'"></signup>
+<login (showButtons)="getShowButtons()" [simpleVersion]="true" *ngIf="action == 'login'"></login>

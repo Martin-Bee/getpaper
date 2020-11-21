@@ -1,0 +1,29 @@
+<!-- Step 6: Payment Successfull and share-->
+<ion-row id="payment-success">
+  <ion-col size-xl="5" size-lg="7" size-md="7" size-sm="12" size="12" push-xl="3" push-lg="3" push-md="2">
+    <ion-row>
+      <ion-col>
+        <h1 class="title">Congratulations, order {{ overview.orderId }} is submitted!</h1>
+        <p class="text">We will send follow up email notifications automatically as your order is fulfilled.</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <h1 class="title">Share the Love!</h1>
+        <h2>
+          We are a small team dedicated to building awesome ordering software. It would really help us if you shared us with your favorites
+          brands
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <app-social-share [url]="shareLink"></app-social-share>
+    </ion-row>
+
+    <ion-row>
+      <!-- Invitation -->
+      <invites [stackName]="overview.stackName"></invites>
+    </ion-row>
+  </ion-col>
+</ion-row>

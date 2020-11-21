@@ -1,0 +1,67 @@
+<div id="choose-products" *ngIf="products.length > 0">
+  <!------ Filter Buttons ------>
+  <ion-row>
+    <h4>Filters:</h4>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <ion-button
+        size="medium"
+        [ngClass]="filters.get(filter) ? 'filter-btn-enable' : 'filter-btn'"
+        *ngFor="let filter of collectionFilters"
+        (click)="applyFilters(filter)"
+      >
+        {{ filter | titlecase }}
+      </ion-button>
+      <ion-button size="small" (click)="resetFilters()" fill="clear" [ngClass]="filters.size != 0 ? 'reset-btn-enable' : 'reset-btn'">
+        <ion-icon slot="icon-only" name="arrow-undo-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <!------ Product Card Elements ------>
+  <ion-row>
+    <ion-col size="12" size-sm="12" size-md="12" size-lg="9" size-xl="7">
+      <ion-row>
+        <ion-col>
+          <ion-button class="green-btn" style="float: right;" (click)="validate()">Next</ion-button>
+          <error-message [message]="errorMessage"></error-message>
+        </ion-col>
+      </ion-row>
+
+      <ion-card *ngFor="let product of filteredProducts" class="cust-card">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="1" class="ion-text-center">
+            <ion-icon name="close" color="danger" large style="font-size: 3em;" (click)="remove(product)" tappable></ion-icon>
+          </ion-col>
+          <ion-col size="3">
+            <img src="{{ product.image.src }}" class="cp-img" (click)="showProductDetails(product)" tappable />
+          </ion-col>
+          <ion-col size="5" (click)="showProductDetails(product)" tappable>
+            <h3 class="p-title">{{ product.title }}</h3>
+            <p class="p-desc" *ngIf="productDetails.get(product.id)">
+              {{ product.handle }} <br />
+              {{ product.vendor }} <br />
+              {{ product.tags }} <br />
+              <span [innerHTML]="product.body_html"></span>
+            </p>
+          </ion-col>
+          <ion-col size="2">
+            <p class="p-desc">Quantity: {{ productQuantitys.get(product.id) }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+      <ion-row>
+        <ion-col>
+          <div style="margin-right: 1.5em;">
+            <ion-button class="green-btn" style="float: right;" (click)="validate()">Next</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</div>
+<div id="choose-products" *ngIf="products.length == 0">
+  Sorry, we couldn't find any products to select.
+</div>

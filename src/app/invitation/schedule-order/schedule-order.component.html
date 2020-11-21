@@ -1,0 +1,63 @@
+<!-- Order Delivery Timings -->
+<ion-row id="del-time">
+  <ion-col size-xl="6" size-lg="7" size-md="7" size-sm="12" size="12" push-xl="3" push-lg="3" push-md="2">
+    <ion-row>
+      <ion-col>
+        <!-- <form [formGroup]="deliveryTimeForm"> -->
+        <ion-list>
+          <ion-radio-group [(ngModel)]="delivery.when" (ionChange)="handleDelTimeRadio($event)">
+            <ion-list-header>
+              <ion-label>
+                <h1 style="font-size: 3em; margin-bottom: 1em;">When do you want your order?</h1>
+              </ion-label>
+            </ion-list-header>
+
+            <ion-item lines="none">
+              <ion-label class="cust-label">Immediately. Cost is not an issue</ion-label>
+              <ion-radio slot="start" value="immediate"></ion-radio>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label class="cust-label"
+                >As soon as possible. Ship <span style="color: deepskyblue; font-weight: bold;">least expensive</span>
+              </ion-label>
+              <ion-radio slot="start" value="leastExpensive"></ion-radio>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label class="cust-label"
+                >When there is enough to fill at least <span style="color: deepskyblue; font-weight: bold;">75%</span>
+                of the order
+              </ion-label>
+              <ion-radio slot="start" value="enough75"></ion-radio>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-label class="cust-label"
+                >On a certain day <ion-icon name="calendar" style="font-size: 2em;color: deepskyblue"></ion-icon>
+              </ion-label>
+              <ion-radio slot="start" value="certainDay"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+          <ion-item *ngIf="showCalendar">
+            <ion-label position="floating">MM/DD/YYYY</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" min="{{ minDate }}" max="{{ maxDate }}" [(ngModel)]="delivery.date"></ion-datetime>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label style="margin: 0">
+              <b>Keep as my default choice</b>
+            </ion-label>
+            <ion-checkbox [(ngModel)]="delivery.setDefault" slot="start"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+
+        <ion-button id="cont-btn" size="large" mode="ios" (click)="saveDeliveryTime()">
+          <b>Continue ></b>
+        </ion-button>
+        <!-- </form> -->
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>

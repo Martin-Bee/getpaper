@@ -1,0 +1,55 @@
+<!-- No stacks or Error -->
+<div *ngIf="!stack">
+  <ion-item *ngIf="!errorMessage">
+    <ion-label color="primary">Loading ...</ion-label>
+    <ion-spinner name="dots" color="primary"></ion-spinner>
+  </ion-item>
+  <error-message [message]="errorMessage"></error-message>
+</div>
+
+<ng-template [ngIf]="stack">
+  <header-invitee
+    [stackName]="stack.name.toUpperCase() + ' by ' + stack.owner"
+    [showOverlay]="showOverlay"
+    [overview]="overview"
+    (goNext)="gotoShipping()"
+    (goViewDetails)="showViewDetails()"
+    (setSearchQuery)="getSearchQuery($event)"
+  ></header-invitee>
+
+  <ion-content class="ion-padding">
+    <error-message [message]="errorMessage"></error-message>
+    <!-- Browser Platform -->
+    <ion-grid [ngClass]="{'no-scroll': showOverlay}">
+      <!-- Next Step Address Form -->
+      <display-products
+        *ngIf="currentStep == 1"
+        [showOverlay]="showOverlay"
+        [stackOriginal]="stack"
+        [search]="search"
+        (goNext)="gotoShipping()"
+        (setOverview)="getOverview($event)"
+      ></display-products>
+      <!-- Step 2 pick a login or signup -->
+      <signup-login *ngIf="currentStep == 2" (done)="getLoginStatus($event)"></signup-login>
+      <!-- Step 3 pick an address -->
+      <invitee-choose-address *ngIf="currentStep == 3" (setShippingAddress)="getShippingAddress($event)"></invitee-choose-address>
+      <!-- Step 4 pick a delivery option -->
+      <invitee-schedule-order *ngIf="currentStep == 4" (setDelivery)="getDelivery($event)"></invitee-schedule-order>
+
+      <!-- Step 5 PAY -->
+      <stripe-pay
+        *ngIf="currentStep == 5"
+        [overview]="overview"
+        [stripeConnectKey]="stack.stripeConnectKey"
+        [stripeAccessToken]="stack.stripeAccessToken"
+        (paymentSuccess)="getPaymentSuccess($event)"
+      ></stripe-pay>
+
+      <invitee-congratulations *ngIf="currentStep == 6" [overview]="overview"></invitee-congratulations>
+    </ion-grid>
+
+    <!-- Overlay grey -->
+    <div *ngIf="showOverlay && currentStep == 1" class="overlay-wrap con"></div>
+  </ion-content>
+</ng-template>

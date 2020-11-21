@@ -1,0 +1,17 @@
+extends template-email
+
+block content
+  h1(style="color: #67D533") You’re invited!
+  p #{companyName} is excited to give you exclusive access to their&nbsp;
+    strong #{stackName} Collection.
+
+    p Place your first order, Now!
+
+    +button(inviteURL, `Continue to ${stackName} Collection →`)
+    p #{companyName} uses GetPaper Stacks, the fastest way to buy and sell at wholesale.
+      | This email contains private information about your	banana hammock in stacks — please do not forward. If you have any questions,
+      |	email us at&nbsp;
+      a(href='feedback@GetPaper.io') feedback@GetPaper.io
+
+      p Cheers,
+      p The team at GetPaper

@@ -1,0 +1,19 @@
+ion-title {
+  font-family: Helvetica !important;
+  // padding-left: 2.5em !important;
+  // padding-bottom: 1em !important;
+
+  h5 {
+    span {
+      font-weight: bold;
+    }
+
+    small {
+      color: #929292;
+    }
+  }
+
+  .toolbar-title {
+    text-align: left;
+  }
+}

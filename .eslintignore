@@ -1,0 +1,15 @@
+# path/to/project/root/.eslintignore
+# /node_modules/* and /bower_components/* in the project root are ignored by default
+
+# Ignore built files except build/index.js
+build/*
+!build/index.js
+functions/
+node_modules/
+karma.conf.js
+src/firebase-messaging-sw.js
+e2e/protractor.conf.js
+e2e/*
+src/zone-flags.ts
+dist-share-buttons/
+www/*

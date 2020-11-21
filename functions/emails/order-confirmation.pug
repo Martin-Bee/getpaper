@@ -1,0 +1,18 @@
+extends template-email
+
+block content
+
+  p Thank you for your order with GetPaper.
+  br
+  p OrderId: #{overview.orderId}
+  p Total: #{overview.totalSpend}
+  p Number of products ordered: #{overview.totalUnits}
+  p
+  p We will send follow up email notifications automatically as your order is fulfilled.
+  p
+  p This email contains private information about your banana hammock — please do not forward. If you have any questions,	please email us at&nbsp;
+    a(href='mailto:feedback@GetPaper.io')
+      span feedback@GetPaper.io
+
+  p Cheers,
+  p The team at GetPaper

@@ -1,0 +1,28 @@
+#del-time {
+  .cust-label {
+    font-size: 1.3em !important;
+    white-space: nowrap !important;
+  }
+
+  ion-icon {
+    font-size: 1.5em;
+    color: #222;
+  }
+
+  ion-radio {
+    --color-checked: var(--cust-signupBtn);
+  }
+
+  #cont-btn {
+    --background: var(--cust-signupBtn);
+    --margin-top: 0;
+    --margin-end: auto;
+    --margin-bottom: 0;
+    --margin-start: auto;
+    --color: #fff;
+    --border-radius: 6px;
+    --width: 50%;
+    display: block;
+    text-transform: none;
+  }
+}

@@ -1,0 +1,112 @@
+<!-- Was only display on step 1
+*ngIf="currStep.step == '1'"
+-->
+<ion-header>
+  <!-- DESKTOP  ion-toolbar *ngIf="plt.is('desktop')" -->
+  <ion-toolbar>
+    <ion-title class="header1">
+      <ion-row>
+        <ion-col text-left align-self-left>
+          <h1>
+            <a href="javascript:;" (click)="goHome()"><img src="/assets/logo/logoImg.png" width="40" alt="logo"/></a>
+            {{ stackName }}
+          </h1>
+        </ion-col>
+        <ion-col class="ion-align-self-center">
+          <ion-searchbar
+            type="text"
+            [debounce]="1000"
+            (ionChange)="search($event)"
+            showCancelButton="never"
+            placeholder="Filter Products"
+          ></ion-searchbar>
+        </ion-col>
+        <!--
+        <ion-col class="ion-text-center" align-self-center>
+          Order# <b>{{ orderName }}</b>
+        </ion-col>
+        -->
+      </ion-row>
+    </ion-title>
+    <ion-row class="header2">
+      <ion-col class="ion-text-center">
+        <h4>
+          Total Units: <b>{{ overview.totalUnits }}</b>
+        </h4>
+      </ion-col>
+
+      <ion-col class="ion-text-center">
+        <h4>
+          Total Spend: <b>{{ overview.totalSpend | currency: overview.currency }}</b>
+        </h4>
+      </ion-col>
+
+      <ion-col class="ion-text-right">
+        <h4>Average Rating:</h4>
+      </ion-col>
+      <ion-col class="ion-text-left rating">
+        <ngb-rating [(rate)]="overview.rating" max="5">
+          <ng-template let-fill="fill" let-index="index">
+            <span class="star" [class.filled]="fill === 100">&#9733;</span>
+          </ng-template>
+        </ngb-rating>
+      </ion-col>
+
+      <ion-col *ngIf="overview.viewDetails">
+        <ion-button (click)="viewDetails()" style="padding-top: 10px;">
+          <ion-icon name="document-text-outline"></ion-icon>
+          Order details
+        </ion-button>
+      </ion-col>
+      <ion-col *ngIf="overview.showButton">
+        <ion-button mode="ios" class="green-btn" (click)="next()">Order <ion-icon name="arrow-forward-outline"></ion-icon></ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+
+  <!-- MOBILE -->
+  <ion-toolbar *ngIf="plt.is('mobile')">
+    <ion-title>
+      <ion-row class="mobile-header">
+        <ion-col class="ion-text-center" align-self-center>
+          <ion-row style="border-bottom: 1px solid #ddd !important;">
+            <ion-col text-left align-self-center>
+              <img src="/assets/logo/logoImg.png" width="40" alt="logo" />
+            </ion-col>
+
+            <ion-col>
+              <ion-button expand="block" mode="ios" class="sche-shi-btn" style="font-size: 1em;" (click)="next()"> Fulfill ></ion-button>
+            </ion-col>
+
+            <ion-col class="ion-text-center" align-self-center>
+              <!--
+              <p style="font-size: 12px;">
+                Order# <b>{{ orderName }}</b>
+              </p>
+              -->
+              <p style="font-size: 12px;">{{ stackName }}</p>
+            </ion-col>
+          </ion-row>
+
+          <ion-row align-items-end>
+            <ion-col class="ion-text-center">
+              <p style="font-size: 20px;">
+                <b>{{ overview.totalUnits }}</b>
+              </p>
+              <p style="font-size: 16px;">Total Units</p>
+            </ion-col>
+
+            <ion-col class="ion-text-center">
+              <p style="font-size: 20px;">
+                <b>{{ overview.totalSpend }}</b>
+              </p>
+              <p style="font-size: 16px;">Total Spend</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-toolbar>
+
+  <div *ngIf="showOverlay" class="overlay-wrap"></div>
+</ion-header>

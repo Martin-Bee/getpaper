@@ -1,0 +1,33 @@
+#spinner-wrapper {
+   .custom-spinner {
+      background: url('/assets/logo/logoImg.png') no-repeat center;
+      background-size: 8em;
+      text-align: center;
+
+      .loading {
+         animation: rotation 3s infinite linear;
+         width: 21em;
+         height: 21em;
+         max-width: 22em;
+         position: relative;
+         top: 3em;
+      }
+
+      .text {
+         max-width: 17em;
+         text-align: center;
+         font-family: Helvetica;
+         margin: 2em;
+      }
+   }
+}
+
+@keyframes rotation {
+   from {
+      transform: rotate(0deg);
+   }
+
+   to {
+      transform: rotate(359deg);
+   }
+}

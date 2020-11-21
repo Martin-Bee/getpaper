@@ -1,0 +1,114 @@
+<div id="organise-products">
+  <ion-item>
+    <ion-label>Currency</ion-label>
+    <ion-text>
+      <a href="javascript:;" (click)="changeCurrency()">{{ currency }}</a>
+    </ion-text>
+  </ion-item>
+  <ion-item>
+    <ion-label>Product Options</ion-label>
+    <ion-button class="icon-only-btn--grey" size="small" fill="clear" (click)="addOption()">
+      <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+    </ion-button>
+    <ion-text>
+      <a href="javascript:;" (click)="changeVariants()">{{ variantsOptions() }}</a>
+    </ion-text>
+  </ion-item>
+  <ion-item>
+    <ion-label>Price adjuster</ion-label>
+    <ion-button class="icon-only-btn--grey" size="small" fill="clear" (click)="changePricing()">
+      <ion-icon name="logo-usd"></ion-icon>
+    </ion-button>
+    {{ pricingPercent }}%
+  </ion-item>
+  <ion-text *ngIf="hasError" color="danger"
+    >Please provide at least one option value for the higlighted rows in orange, or remove some product options above.</ion-text
+  >
+  <div style="padding-top: 0.5em;">
+    <ion-row class="ion-justify-content-end">
+      <ion-button class="green-btn" (click)="complete()">Next</ion-button>
+    </ion-row>
+  </div>
+
+  <!------ Products Listings  ------>
+  <ion-list style="padding-top: 0.5em;">
+    <ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2" class="ion-text-center">
+            <b>Style Name</b>
+          </ion-col>
+          <ion-col size="2" class="ion-text-center" *ngFor="let name of variantsName">
+            <b>{{ name }}</b>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <b>Images</b>
+          </ion-col>
+          <ion-col size="1" class="ion-text-center">
+            <b>Price</b>
+          </ion-col>
+          <ion-col size="1" class="ion-text-center">
+            <b></b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list-header>
+
+    <ion-reorder-group disabled="false" (ionItemReorder)="reorderItems($event)">
+      <ion-item id="product-{{ product.id }}" *ngFor="let product of products">
+        <ion-row [ngClass]="edits.get(product.id).warning ? 'warning-item' : ''">
+          <ion-col size="2" style="white-space:normal">
+            <span *ngIf="edits.get(product.id).title">{{ edits.get(product.id).title }} </span>
+            <span *ngIf="!edits.get(product.id).title">{{ product.title }}</span>
+            <!-- Button to edit title -->
+            <ion-button class="icon-only-btn--grey" size="small" fill="clear" (click)="variantSuggestion(product, 'title__custom')">
+              <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="2" *ngFor="let name of variantsName; index as i">
+            <div *ngIf="edits.get(product.id).variants.get(name) && edits.get(product.id).variants.get(name).size > 0">
+              <ion-button
+                [ngClass]="variant.indexOf('--custom') >= 0 ? 'cust-added-variant-btn' : 'cust-variant-btn' + i"
+                class="cust-green-btn"
+                size="small"
+                *ngFor="let variant of edits.get(product.id).variants.get(name)"
+                (click)="removeVariant($event, product, name, variant)"
+              >
+                {{ variant | replace: '--custom':'' }}
+              </ion-button>
+            </div>
+            <ion-button class="icon-only-btn--grey" size="small" fill="clear" (click)="variantSuggestion(product, name)">
+              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+            <!--
+                  <div *ngIf="edits.get(product.id).get(name).size == 0">
+                    <ion-button class="cust-dark-btn" size="small" [mode]="mode" (click)="variantSuggestion(product, name)">
+                      <span>Suggest {{ name }}</span>
+                    </ion-button>
+                  </div>
+                -->
+          </ion-col>
+          <ion-col size="4">
+            <div *ngFor="let image of product.images" style="display: inline; white-space:normal;">
+              <img src="{{ image.src }}" style="width: 30%;" imageViewer />
+            </div>
+          </ion-col>
+          <!-- PRICE -->
+          <ion-col size="1">
+            <span class="ion-text-nowrap">{{ edits.get(product.id).price | currency: currency }}</span>
+            <!-- Button to edit price -->
+            <ion-button class="icon-only-btn--grey" size="small" fill="clear" (click)="variantSuggestion(product, 'price__custom')">
+              <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-reorder></ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+  </ion-list>
+  <div style="padding-top: 0.5em;">
+    <ion-row class="ion-justify-content-end">
+      <ion-button class="green-btn" (click)="complete()">Next</ion-button>
+    </ion-row>
+  </div>
+</div>

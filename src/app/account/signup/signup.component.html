@@ -1,0 +1,350 @@
+<!------- Enter email (Step - 0) ------->
+<div *ngIf="currentStep == 0">
+  <div class="wrapper">
+    <h1 *ngIf="!simpleVersion">
+      <span>Introducing </span>
+      <b>Stacks</b>
+    </h1>
+
+    <p class="intro-text" *ngIf="!simpleVersion">
+      GetPaper is excited to introduce <b>Stacks</b>, the fastest way to buy and sell at wholesale. Stacks are digital order books for your
+      business. Fast to setup, integrated to your favourite apps, and easy to use. Signup now to be wicked awesome today!
+    </p>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8" size-sm="8" size-md="8" size-lg="8" size-xl="8" class="ion-text-center ion-align-self-center">
+          <form [formGroup]="signupForm">
+            <ion-item lines="none">
+              <ion-input
+                type="email"
+                (keyup.enter)="registerUserS1()"
+                required
+                email
+                formControlName="email"
+                placeholder="Email address"
+              ></ion-input>
+            </ion-item>
+          </form>
+        </ion-col>
+        <ion-col size="4" size-sm="4" size-md="4" size-lg="4" size-xl="4" class="ion-text-center ion-align-self-center">
+          <ion-button id="get-started" size="small" mode="ios" [disabled]="!signupForm.valid" (click)="registerUserS1()">
+            <b>Get Started</b>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="!simpleVersion">
+        <ion-col class="ion-text-center">
+          <ion-label>Already Signed up? <span style="color: #4a9dd6; cursor: pointer;" (click)="goToLogin()">Login</span></ion-label>
+        </ion-col>
+      </ion-row>
+      <!-- If email error occurs -->
+      <ion-text color="danger" *ngIf="errorMsg"> <ion-icon name="alert"></ion-icon>{{ errorMsg }} </ion-text>
+    </ion-grid>
+  </div>
+</div>
+<!-- || false -->
+
+<!-- Additional User Data  (Step - 2) -->
+<div *ngIf="currentStep >= 1">
+  <div class="signup-wrapper">
+    <!-- Your Name -->
+    <div class="step1" *ngIf="currentStep == 1">
+      <ion-row>
+        <ion-col size-xl="5" size-lg="6" size-md="7" size-sm="8" size="12" push-xl="4" push-lg="3" push-md="2" push-sm="1">
+          <h1>Please tell us about you</h1>
+          <p>
+            This is how your people will see you in GetPaper and refer to you. We also want to know if you want to sell or buy wholesale
+            products.
+          </p>
+
+          <form [formGroup]="nameForm">
+            <ion-list style="padding: 0; margin: 0;">
+              <ion-item lines="none">
+                <ion-label position="stacked">
+                  <p class="name-form">
+                    <b>Full Name</b>
+                  </p>
+                </ion-label>
+                <ion-input type="text" formControlName="fullName"></ion-input>
+              </ion-item>
+              <!--
+                <ion-item lines="none">
+                  <ion-label position="stacked">
+                    <p class="name-form"><b>Display Name</b> (Optional)</p>
+                  </ion-label>
+                  <ion-input type="text" formControlName="userName"></ion-input>
+                </ion-item>
+                -->
+              <ion-item lines="none" class="type-form" *ngIf="errorMsg">
+                <ion-text color="danger"> <ion-icon name="alert"></ion-icon>{{ errorMsg }} </ion-text>
+              </ion-item>
+              <ion-item lines="none">
+                <p>
+                  I want to (please select an option below) <br />
+                  {{ choiceBuyerSeller }}
+                </p>
+              </ion-item>
+              <ion-item lines="none" class="type-form" style="margin-top: 0.5em;">
+                <ion-label id="sellLabel" class="activeSell"><b>sell products</b></ion-label>
+                <ion-toggle formControlName="sellBuyToggle" class="cust-toggle" (ionChange)="clickSellBuy()"> </ion-toggle>
+                <ion-label id="buyLabel" style="margin-left: 50px;"><b>buy wholesale</b></ion-label>
+              </ion-item>
+            </ion-list>
+
+            <ion-item lines="none">
+              <ion-label class="cust-check-label">
+                <b>It’s ok to send me email about the GetPaper service</b>
+              </ion-label>
+              <ion-checkbox [(ngModel)]="subscribeToService" [ngModelOptions]="{ standalone: true }" slot="start"> </ion-checkbox>
+            </ion-item>
+
+            <ion-button id="step1-btn" size="large" mode="ios" [disabled]="!nameForm.valid" (click)="registerUserS2()">
+              <b>Continue To Password</b>
+
+              <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+            </ion-button>
+          </form>
+        </ion-col>
+      </ion-row>
+    </div>
+    <!-- Password -->
+    <div class="step2" *ngIf="currentStep == 2">
+      <ion-row>
+        <ion-col size-xl="5" size-lg="6" size-md="7" size-sm="8" size="12" push-xl="4" push-lg="3" push-md="2" push-sm="1">
+          <h1>Set your password</h1>
+
+          <p>Choose a password for signing in to GetPaper.</p>
+
+          <form [formGroup]="passwordForm">
+            <ion-list style="padding: 0; margin: 0;">
+              <ion-item lines="none">
+                <ion-label position="stacked">
+                  <p class="password-form">
+                    <b>Password: </b>
+                  </p>
+                </ion-label>
+                <ion-input type="password" autocomplete="off" [(ngModel)]="password" [ngModelOptions]="{ standalone: true }"></ion-input>
+                <ion-label position="stacked">
+                  <p class="password-form">
+                    <b>Confirm your password: </b>
+                  </p>
+                </ion-label>
+                <ion-input type="password" autocomplete="off" formControlName="verification"></ion-input>
+              </ion-item>
+              <div>
+                <password-strength-meter [password]="password"></password-strength-meter>
+              </div>
+            </ion-list>
+
+            <ion-text color="danger" *ngIf="errorMsg"> <ion-icon name="alert"></ion-icon>{{ errorMsg }} </ion-text>
+            <p class="msg">
+              Password must be at least 6 characters long, and can’t be things like “password”, “123456”, or “abcdef”.
+            </p>
+
+            <ion-button
+              id="step2-btn"
+              mode="ios"
+              size="large"
+              style="left: 10%;"
+              [disabled]="!passwordForm.valid"
+              (click)="registerUserS3()"
+            >
+              <b>Continue to Stack Info</b>
+
+              <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+            </ion-button>
+          </form>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!------- About Yourself
+    <div class="step3" *ngIf="currStep == 9">
+      <ion-row>
+        <ion-col size-xl="5" size-lg="6" size-md="7" size-sm="8" size-xs="12" push-xl="4" push-lg="3" push-md="2" push-sm="1">
+          <h1>Tell us about you</h1>
+          <form [formGroup]="additionalDataForm">
+            <ion-list style="padding: 0; margin: 0;">
+              <ion-item lines="none">
+                <ion-label position="stacked">
+                  <p class="additional-data-form">
+                    <b>What will your people use GetPaper for?</b>
+                  </p>
+                </ion-label>
+                <ion-select mode="ios" formControlName="userType" interface="popover">
+                  <ion-select-option value="{{ option.val }}" *ngFor="let option of additionalUserDataOptions.userType">{{
+                    option.disp
+                  }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <div *ngIf="!additionalDataForm.controls.userType.valid">
+                <div class="cust-greydout-label"></div>
+                <div class="cust-greydout-input"></div>
+              </div>
+              <ion-item lines="none" *ngIf="additionalDataForm.controls.userType.valid">
+                <ion-label position="stacked">
+                  <p class="additional-data-form">
+                    <b>Great! What kind of products?</b>
+                  </p>
+                </ion-label>
+                <ion-select mode="ios" formControlName="productType" interface="popover" multiple>
+                  <ion-select-option value="{{ option.val }}" *ngFor="let option of additionalUserDataOptions.productType">{{
+                    option.disp
+                  }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <div *ngIf="!additionalDataForm.controls.productType.valid">
+                <div class="cust-greydout-label"></div>
+                <div class="cust-greydout-input"></div>
+              </div>
+              <ion-item lines="none" *ngIf="additionalDataForm.controls.productType.valid">
+                <ion-label position="stacked">
+                  <p class="additional-data-form">
+                    <b>How big is your company?</b>
+                  </p>
+                </ion-label>
+                <ion-select mode="ios" formControlName="companyStrength" interface="popover">
+                  <ion-select-option value="{{ option.val }}" *ngFor="let option of additionalUserDataOptions.companyStrength"
+                    >{{ option.disp }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <div *ngIf="!additionalDataForm.controls.companyStrength.valid">
+                <div class="cust-greydout-label"></div>
+                <div class="cust-greydout-input"></div>
+              </div>
+              <ion-item lines="none" *ngIf="additionalDataForm.controls.companyStrength.valid">
+                <ion-label position="stacked">
+                  <p class="additional-data-form">
+                    <b>What is your role there?</b>
+                  </p>
+                </ion-label>
+                <ion-select mode="ios" formControlName="userRoleInCompany" interface="popover">
+                  <ion-select-option value="{{ option.val }}" *ngFor="let option of additionalUserDataOptions.userRoleInCompany"
+                    >{{ option.disp }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <div *ngIf="!additionalDataForm.controls.userRoleInCompany.valid">
+                <div class="cust-greydout-label"></div>
+                <div class="cust-greydout-input"></div>
+              </div>
+              <ion-item lines="none" *ngIf="additionalDataForm.controls.userRoleInCompany.valid">
+                <ion-label position="stacked">
+                  <p class="additional-data-form">
+                    <b>Are you a manager? (Do people report to you?)</b>
+                  </p>
+                </ion-label>
+
+                <ion-input type="checkbox" style="display: none;" formControlName="isManager"></ion-input>
+              </ion-item>
+              <ion-row
+                *ngIf="additionalDataForm.controls.userRoleInCompany.valid"
+                style="border: 2px solid #929292; border-radius: 10px; text-align: center"
+              >
+                <ion-col id="manager-y" style="border-right: 2px solid lightgray" no-padding>
+                  <ion-button fill="clear" expand="block" (click)="assignIsManager('yes')">YES</ion-button>
+                </ion-col>
+                <ion-col id="manager-n" no-padding>
+                  <ion-button fill="clear" expand="block" (click)="assignIsManager('no')">NO</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+
+            <ion-button id="step3-btn" size="large" mode="ios" [disabled]="!additionalDataForm.valid" (click)="saveAdditionalUserData()">
+              <b>Continue to Stack Info</b>
+
+              <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+            </ion-button>
+          </form>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    ------->
+
+    <!------- Company Name ------->
+    <div class="step4" *ngIf="currentStep == 3">
+      <ion-row>
+        <ion-col size-xl="5" size-lg="6" size-md="7" size-sm="8" size-xs="12" push-xl="4" push-lg="3" push-md="2" push-sm="1">
+          <h1>What’s your <br />company called</h1>
+
+          <form [formGroup]="companyNameForm">
+            <ion-list style="padding: 0; margin: 0;">
+              <ion-item lines="none">
+                <ion-label position="stacked">
+                  <p class="company-name-form">
+                    <b>Company name</b>
+                  </p>
+                </ion-label>
+                <ion-input type="text" formControlName="companyName" placeholder="Ex. Acme or Acme Marketing"> </ion-input>
+              </ion-item>
+            </ion-list>
+            <p class="msg">We’ll use this to name your GetPaper stack, which you can always change later.</p>
+
+            <ion-text color="danger" *ngIf="errorMsg"> <ion-icon name="alert"></ion-icon>{{ errorMsg }} </ion-text>
+
+            <ion-button id="step4-btn" size="large" mode="ios" [disabled]="!companyNameForm.valid" (click)="registerUserS4()">
+              <b>Continue to Terms and Conditions</b>
+
+              <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+            </ion-button>
+          </form>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!------- Getpaper URL
+    <div class="step5" *ngIf="currStep == 10">
+      <ion-row>
+        <ion-col size-xl="5" size-lg="6" size-md="7" size-sm="8" size-xs="12" push-xl="4" push-lg="3" push-md="2" push-sm="1">
+          <h1>What URL do you want for your GetPaper stack?</h1>
+
+          <p style="font-weight: 600">Choose the address you’ll use to sign in to GetPaper</p>
+
+          <form [formGroup]="domainNameForm">
+            <ion-row>
+              <ion-col>
+                <ion-item lines="none">
+                  <ion-label position="stacked">
+                    <p class="domain-name-form"><b>Your stack URL</b> (letters, numbers, and dashes only)</p>
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="ion-align-self-center">
+                <ion-item lines="none" style="margin-top: 0">
+                  <ion-input type="text" formControlName="domainName" (ionInput)="checkDomainNameAvailability($event)"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col class="ion-align-self-center">
+                <span style="font-size: 1.5em; font-weight: bold">.getpaper.io</span>
+              </ion-col>
+            </ion-row>
+
+            <p class="msg" *ngIf="domainUsed">
+              <b>{{ domainName }}</b> is already taken, how about...
+            </p>
+
+            <ion-button id="step5-btn" size="large" mode="ios" [disabled]="!domainNameForm.valid || domainUsed" (click)="saveDomainName()">
+              <b>Create</b>
+              <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+            </ion-button>
+          </form>
+        </ion-col>
+      </ion-row>
+    </div>
+    ------->
+  </div>
+</div>
+
+<!-- <ion-fab bottom right>
+		<button ion-fab mini>Help</button>
+		<div class="arrow-down"></div>
+	</ion-fab> -->

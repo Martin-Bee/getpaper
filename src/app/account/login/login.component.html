@@ -1,0 +1,55 @@
+<ion-grid style="height: 100%;">
+  <!-- This is simple logo in the middle of the screen
+  <ion-row>
+    <ion-col>
+      <ion-label style="width: 100%">
+        <a href="/">
+          <img src="assets/logo/logo.png" style="display: block; margin: 0 auto;" />
+        </a>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+-->
+
+  <ion-row class="ion-align-items-center ion-justify-content-center" style="height: 80%">
+    <ion-col
+      class="ion-align-self-center"
+      size-lg="5"
+      size-md="7"
+      size-sm="8"
+      size-xl="4"
+      size="12"
+      [ngClass]="{ 'cust-col': !simpleVersion }"
+    >
+      <form [formGroup]="loginForm">
+        <ion-list>
+          <ion-list-header>
+            <ion-text style="width: 100%" class="ion-text-center signin-text">Please login to access Stacks. </ion-text>
+          </ion-list-header>
+          <ion-text color="danger" *ngIf="loginErrorMsg"> <ion-icon name="alert"></ion-icon>{{ loginErrorMsg }} </ion-text>
+          <ion-item class="cust-input" lines="none">
+            <ion-input type="email" required email formControlName="email" placeholder="Email address"></ion-input>
+          </ion-item>
+          <ion-item class="cust-input" lines="none">
+            <ion-input formControlName="password" placeholder="Password" type="password" (keyup.enter)="signIn()"> </ion-input>
+          </ion-item>
+
+          <ion-item (click)="goToForgotPassword()" lines="none">
+            <ion-label class="forgot-btn ion-text-right button signup-btn">Forgot Password?</ion-label>
+          </ion-item>
+        </ion-list>
+
+        <ion-button (click)="signIn()" [disabled]="!loginForm.valid" class="login-btn" expand="block" fill="solid" mode="ios" id="ok">
+          Sign In
+          <ion-icon slot="end" name="log-in"></ion-icon>
+        </ion-button>
+      </form>
+
+      <p ion-text class="ion-text-center" *ngIf="!simpleVersion">
+        Don't have an account?
+        <span (click)="goToSignup()" class="button signup-btn">Sign up</span>
+      </p>
+      <ion-text color="success" *ngIf="success">Logging you in. Please wait a second.</ion-text>
+    </ion-col>
+  </ion-row>
+</ion-grid>

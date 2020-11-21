@@ -1,0 +1,93 @@
+<allow-push-web *ngIf="wasAskedForPush"></allow-push-web>
+<div id="add-shopify-store">
+  <ion-card>
+    <ion-row>
+      <ion-col size-xl="12" size-lg="12" size-md="12" size-sm="12" size="12">
+        <!-- Shopify Domain Name -->
+        <ion-row>
+          <ion-col>
+            <ion-row>
+              <ion-col>
+                <h1>Import product from shopify</h1>
+                <p style="padding-top: 20px;">
+                  To import shopify products you need to install our app on your store. No worry it is pretty easy.
+                  <br />
+                </p>
+                <p *ngIf="notificationDisabled">
+                  <ion-text color="danger"><strong>Browser notification disabled!</strong></ion-text>
+                  <br />
+                </p>
+                <p [innerHtml]="notificationDisabled"></p>
+                <p>
+                  Once you have allowed notification on your browser notification and install the app, we will notify you when it's done.
+                </p>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col class="shopify-label ion-text-left" size-xl="12" size-lg="12" size-md="12" size-sm="12" size="12"
+                >First Enter your store address (ie: my-awesome-store.myshopify.com):
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="shopify-input" size-xl="12" size-lg="12" size-md="12" size-sm="12" size="8">
+                <ion-item lines="none" class="shopify-label shopify-http">
+                  <ion-label inline>https://</ion-label>
+                  <ion-input
+                    class="shopify-input-text"
+                    type="text"
+                    size="25"
+                    placeholder="your-shopify-store-name"
+                    [disabled]="status == 'open'"
+                    [(ngModel)]="shopifyAddress"
+                    (change)="addressChange()"
+                    (keyup)="addressChange()"
+                  >
+                  </ion-input>
+                  <ion-label inline>.myshopify.com</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="errorMessage">
+              <ion-label color="danger"> <ion-icon name="alert"></ion-icon>{{ errorMessage }} </ion-label>
+            </ion-row>
+            <ion-row *ngIf="status == 'start'">
+              <ion-col class="shopify-btn-col" size-xl="2" size-lg="2" size-md="2" size-sm="12" size="12">
+                <ion-button class="shopify-btn" [disabled]="!validAddress" (click)="openAppLink()">Install App</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="status == 'open' || status == 'install'">
+              <ion-col>
+                <p>
+                  <strong>
+                    Please follow the instruction in the new open Tab to install our app on shopify. If the new window didn't open you can
+                    click <a href="{{ shopifyInstallUrl }}" target="_blank">here</a> or try to disable your browser popup blocker.
+                  </strong>
+                </p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="status == 'test' || status == 'install'">
+              <ion-col>
+                <ion-button class="shopify-btn" (click)="testConnection()">Test connection</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="status == 'fail'">
+              <ion-col>
+                <p>
+                  <strong>
+                    Wrong Store address? You can try again by editing the address.<br />
+                    Need help installing our app? Contact our support team. You can also retry by clicking
+                    <a href="javascript:void(0);" (click)="openAppLink()">here</a>.
+                  </strong>
+                </p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-button fill="clear" class="shopify-cancel" (click)="cancel()">Cancel, I will finish later.</ion-button>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</div>

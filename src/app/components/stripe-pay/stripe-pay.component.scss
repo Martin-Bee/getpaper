@@ -1,0 +1,35 @@
+#add-card {
+  .title {
+    font-size: 2.5em;
+  }
+
+  .sub-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--cust-grayText);
+  }
+
+  .field-label {
+    font-weight: bold;
+  }
+
+  .field {
+    border: 1px solid gray;
+    border-radius: 6px;
+    padding: 0 1em;
+    margin: 0.5em 0 1em 0;
+  }
+
+  .stripe-btn {
+    --background: var(--cust-signupBtn);
+    --margin-top: 0;
+    --margin-end: auto;
+    --margin-bottom: 0;
+    --margin-start: auto;
+    --color: #fff;
+    --border-radius: 6px;
+    --width: 50%;
+    display: block;
+    text-transform: none;
+  }
+}

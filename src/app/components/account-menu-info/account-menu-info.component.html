@@ -1,0 +1,25 @@
+<ion-list>
+  <ion-list-header>
+    <div>
+      <ion-row class="ion-margin-bottom ion-margin-top ion-padding-top" (click)="onClickEditProfile()">
+        <img item-left src="assets/img/user.png" class="account-img" />
+        <h4 margin-left>{{ accountName }}</h4>
+        <small class="account-email">{{ email }}</small>
+      </ion-row>
+    </div>
+  </ion-list-header>
+  <ion-item button (click)="updateInfos()" lines="none">
+    <ion-icon name="information-circle-outline" color="primary"></ion-icon>
+    <ion-label class="small">Your Information</ion-label>
+  </ion-item>
+  <ion-item button (click)="updateSecurity()" lines="none">
+    <ion-icon name="lock-closed-outline" color="primary"></ion-icon>
+    <ion-label class="small">Account Security</ion-label>
+  </ion-item>
+  <ion-item button (click)="logOut()" lines="none">
+    <ion-icon name="log-out-outline" color="primary"></ion-icon>
+    <ion-label class="small">Logout</ion-label>
+  </ion-item>
+</ion-list>
+
+<!-- <ion-button expand="block" onClick="dismissPopover()">Close</ion-button> -->

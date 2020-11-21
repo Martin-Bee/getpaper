@@ -1,0 +1,12 @@
+<div id="order-form-name">
+  <ion-row>
+    <error-message [message]="errorMessage"></error-message>
+    <ion-col class="ofm-input" size="10">
+      <ion-input type="text" [(ngModel)]="name" placeholder="Your name" (keyup.enter)="next()"></ion-input>
+      <span class="desc">e.g. Spring 2019, Fall Accessories, Tops, etc…</span>
+    </ion-col>
+    <ion-col size="2">
+      <ion-button [disabled]="!name || name.length == 0" class="green-btn" (click)="next()">Next</ion-button>
+    </ion-col>
+  </ion-row>
+</div>

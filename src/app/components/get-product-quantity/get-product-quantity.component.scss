@@ -1,0 +1,20 @@
+ion-content {
+   ion-item {
+      ion-label {
+         margin: 0 0.5em 0 0;
+      }
+
+      ion-input {
+         border: 1px solid dimgray;
+         border-radius: 6px;
+         padding: 15px;
+      }
+   }
+}
+
+.cust-close-icon {
+   position: absolute;
+   top: 0;
+   right: 0;
+   cursor: pointer;
+}

@@ -1,0 +1,84 @@
+$gray-text: var(--cust-grayText);
+$font-forms: var(--ion-font-family);
+$font-title: var(--ion-font-family-title);
+
+ion-header {
+  // To remove the header box-shadow, which is image actually
+  &.header-md::after {
+    background-image: none !important;
+  }
+}
+
+ion-toolbar {
+  --background: #fff;
+  border-bottom: 0.55px solid rgba(0, 0, 0, 0.3);
+}
+
+ion-buttons {
+  margin: 0.5em 0;
+}
+
+.cust-signup-header-btn {
+  margin: 0 0.75em;
+  font-size: 0.95em;
+  --color: $gray-text;
+  --background-hover: rgb(255, 255, 255);
+  --border-hover: 1px;
+  text-transform: none !important;
+  font-family: $font-title;
+}
+
+ion-icon {
+  font-weight: bold;
+}
+
+.button-ios {
+  border-radius: 6px;
+  font-family: $font-title;
+}
+
+.cust-toggle {
+  --background: #b5dda5;
+  --background-checked: #b5dda5;
+  --handle-background: orange;
+  --handle-background-checked: orange;
+}
+
+.cust-btn-outline {
+  --border-radius: 4px !important;
+  --border-style: solid;
+  --border-color: #b2b2b2;
+  --border-width: 2px;
+}
+
+.left-btn {
+  font-size: 2.5em;
+}
+
+.removeBottomBorder {
+  border: none;
+}
+
+@media only screen and (max-width: 576px) {
+  ion-header {
+    .header-logo-img {
+      width: 9em !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  ion-header {
+    .header-logo-img {
+      width: 11em;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  ion-header {
+    .header-logo-img {
+      width: 11em;
+    }
+  }
+}

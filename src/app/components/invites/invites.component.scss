@@ -1,0 +1,17 @@
+#send-products-form-wrapper {
+  .cust-input-wrapper {
+    ion-input {
+      --placeholder-color: dimgray !important;
+    }
+  }
+
+  .sp-btn {
+    --border-radius: 6px;
+    --background: var(--cust-signupBtn);
+    --color: #fff;
+    --margin-top: 3em;
+    --height: 2.5em;
+    --width: 10em;
+    font-weight: bold;
+  }
+}

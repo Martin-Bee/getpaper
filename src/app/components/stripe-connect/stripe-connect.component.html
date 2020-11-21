@@ -1,0 +1,24 @@
+<div [ngSwitch]="status">
+  <div *ngSwitchCase="'not_set'">
+    <p>
+      Connect your GetPaper account to Stripe. Get paid from your customers by credit card, automatically.
+      <br />We use Stripe to make sure you get paid on time and keep your personal and bank details secure. <br /><br />
+      Before you start here, be sure to grab your bank information, a direct deposit form or a cheque so that you have transit, account
+      number and Branch ID.
+      <br /><br />
+      <a href="javascript:;" (click)="connect()" class="stripe-connect dark"><span>Connect with Stripe</span></a>
+    </p>
+    <p class="instructions" *ngIf="windowIsOpen">
+      Please follow Stripe.com instructions on the new window. If the new window didn't open you can click
+      <a href="{{ installationUrl }}" target="_blank">here</a> or try to disable your browser popup blocker.
+    </p>
+  </div>
+  <ion-text *ngSwitchCase="'error'" color="danger">
+    <ion-icon name="close-circle-outline"></ion-icon> Error publishable key is incorrect. Delete your connection and try connect again in
+    <a href="/account-info">account info</a>.
+  </ion-text>
+  <p *ngSwitchCase="'undefined'">Stripe loading ...</p>
+  <ion-text *ngSwitchCase="'set'" color="success">
+    <ion-icon name="checkmark-circle-outline"></ion-icon> Stripe Connect is properly setup!</ion-text
+  >
+</div>

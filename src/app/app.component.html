@@ -1,0 +1,71 @@
+<ion-app>
+  <ion-split-pane contentId="main-content" [when]="userService.hasUserLoggedIn">
+    <ion-menu contentId="main-content" ionDidClose="menuClosed()" ionDidOpen="menuOpened()">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title *ngIf="title && title.length > 0">
+            {{ title }}
+            <ion-icon name="arrow-down"></ion-icon>
+            <br />
+            <div class="circle"></div>
+            <p style="font-size: 10px; color: #787477; display: inline-block" *ngIf="fullName && fullName.length > 0">
+              {{ fullName }}
+            </p>
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <!-- <ion-menu-toggle auto-hide="false"> -->
+          <!--  [routerDirection]="'root'" [routerLink]="[item.url]" -->
+          <ion-item *ngFor="let item of sideMenuItems">
+            <ion-label style="font-size: 14px;font-weight: bold;">
+              <p>
+                {{ item.title }}
+                <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+              </p>
+              <p *ngFor="let subItem of item.data" class="menu-sub-item">
+                <span *ngIf="item.title == 'Orders'" style="font-size: 0.7em">{{ subItem.shipStationOrderId }}</span>
+
+                <span *ngIf="item.title == 'Stacks'" (click)="goTo('stacks', subItem)">{{ subItem.name }}</span>
+                <span *ngIf="item.title == 'Stores'" (click)="goTo('stacks', subItem)">{{ subItem.id }}</span>
+
+                <!-- <span *ngIf="item.title == 'Stores'">{{ subItem.domain }}</span> -->
+                <ion-icon name="ellipsis-horizontal-outline" slot="end"></ion-icon>
+              </p>
+            </ion-label>
+          </ion-item>
+
+          <!-- OLD menu start -->
+          <!-- <ion-item *ngFor="let item of sideMenuItems" [routerDirection]="'root'" [routerLink]="[item.url]">
+            <ion-label style="font-size: 14px;font-weight: bold;">
+              {{ item.title }}
+              <p *ngFor="let subItem of item.data" class="menu-sub-item">
+                {{ subItem.domain }}
+              </p>
+            </ion-label>
+            <ion-icon name="add-circle-outline" slot="end"></ion-icon>
+          </ion-item> -->
+          <!-- OLD menu end -->
+          <!-- </ion-menu-toggle> -->
+        </ion-list>
+      </ion-content>
+      <!-- Footer on the App-->
+      <ion-footer>
+        <ion-toolbar>
+          <ion-title>
+            <small style="font-size: 10px;"><a href="">© GetPaper 2020</a> </small></ion-title
+          >
+        </ion-toolbar>
+      </ion-footer>
+      <!-- <div *ngIf="showOverlay" id="overlay"></div> -->
+    </ion-menu>
+    <ion-router-outlet id="main-content"> </ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
+<!--
+  This is the hide button to test hiding the left panel
+<ion-button (click)="splitPaneClick()">Hide</ion-button>
+-->
+
+<app-size-detector></app-size-detector>

@@ -1,0 +1,62 @@
+<!-- Add Credit Card -->
+<ion-row id="add-card">
+  <ion-col size-xl="5" size-lg="7" size-md="7" size-sm="12" size="12" push-xl="3" push-lg="3" push-md="2">
+    <ion-row>
+      <ion-col>
+        <h1 class="title">Add your credit card</h1>
+        <p class="sub-title">
+          GetPaper does not hold your information. It’s controlled by Stripe, a PCI complaint merchant that has awesome technology.
+        </p>
+        <p>
+          Test Card Data: (any expiration date, cvc and zip code) but card must be: 4242 4242 4242 4242 ( test another card for failed
+          transaction)
+        </p>
+        <error-message [message]="errorMessage"></error-message>
+      </ion-col>
+    </ion-row>
+
+    <!-- Stripe Form -->
+    <ion-row id="payment-form">
+      <ion-col>
+        <form>
+          <ion-row>
+            <ion-col>
+              <ion-label class="field-label">
+                Card number
+                <!-- <span class="brand"><i class="pf pf-credit-card" id="brand-icon"></i></span> -->
+              </ion-label>
+              <div id="card-number-element" class="field"></div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-label class="field-label">Expiry Date</ion-label>
+              <div id="card-expiry-element" class="field"></div>
+            </ion-col>
+            <ion-col>
+              <ion-label class="field-label">CVC</ion-label>
+              <div id="card-cvc-element" class="field"></div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-label class="field-label">Postal Code</ion-label>
+              <ion-input
+                type="text"
+                id="postal-code"
+                [(ngModel)]="postalCode"
+                [ngModelOptions]="{ standalone: true }"
+                class="field"
+                placeholder="90210"
+              ></ion-input>
+            </ion-col>
+          </ion-row>
+
+          <ion-button type="submit" size="large" mode="ios" class="stripe-btn">Buy ></ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>

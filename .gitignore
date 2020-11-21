@@ -1,0 +1,9 @@
+/node_modules/**
+.firebase/**
+.vscode/**
+www/**
+/functions/*.log
+*.log
+/firebase-debug.log
+.DS_Store
+/dist-share-buttons

@@ -1,0 +1,92 @@
+<app-option-menu *ngIf="stackName" title="Stacks" subTitle="Create a new Stack: {{ stackName}}"></app-option-menu>
+<app-option-menu *ngIf="!stackName" title="Stacks" subTitle="Create a new Stack"></app-option-menu>
+
+<ion-content class="ion-padding" *ngIf="shopifyService.hasUser ; else elseBlock">
+  <ion-item *ngIf="loadingText">
+    <ion-label color="primary">{{ loadingText }}</ion-label>
+    <ion-spinner name="dots" color="primary"></ion-spinner>
+  </ion-item>
+  <ion-button *ngIf="currentStep.stepNumber > 0" size="small" (click)="previous()" class="btn-previous" fill="outline" color="medium">
+    <ion-icon name="arrow-back-outline"></ion-icon>
+    Previous
+  </ion-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ currentStep.title }}</ion-card-title>
+      <ion-card-subtitle>{{ currentStep.subtitle }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-text color="danger" *ngIf="errorMessage" [innerHTML]="errorMessage"></ion-text>
+      <!------ Step: 0 - Add Stack Name ------>
+      <pick-stack-name *ngIf="currentStep.stepNumber == 0" [name]="stackName" (setStackName)="getStackName($event)"></pick-stack-name>
+
+      <!------ Step: 1 - Choose Products (iterate only when data is present) ------>
+      <brand-product-picker
+        [products]="products"
+        *ngIf="currentStep.stepNumber == 1"
+        (setProducts)="getProductsStep2($event)"
+      ></brand-product-picker>
+
+      <!------ Step: 2 - Organise Products ------>
+      <brand-organize-product
+        *ngIf="currentStep.stepNumber == 2"
+        [products]="products"
+        [currencies]="currencies"
+        (setOrganizedProducts)="getOrganizedProductsStep3($event)"
+      ></brand-organize-product>
+
+      <!------ Step: 3 - Finalize Products ------>
+      <brand-finalize-product
+        *ngIf="currentStep.stepNumber == 3"
+        [review]="organizedProducts"
+        (setFinalizedProducts)="getFinalizedProductsStep4($event)"
+      ></brand-finalize-product>
+
+      <!--- Step 4 - Connect Stripe -->
+      <div id="stripe-connect" *ngIf="currentStep.stepNumber == 4">
+        <stripe-connect></stripe-connect>
+      </div>
+      <div class="ion-text-center" *ngIf="currentStep.stepNumber == 4">
+        <ion-button class="green-btn" (click)="next()">Next</ion-button>
+      </div>
+
+      <!-- Step 5 - Share on Social Media -->
+      <div class="ion-text-center preview-form" *ngIf="currentStep.stepNumber == 5">
+        <ion-button class="green-btn" (click)="previewStack()">Preview {{ this.stackName }}</ion-button>
+      </div>
+      <div *ngIf="currentStep.stepNumber == 5" class="preview-form label-share">Share your order form on Social Media:</div>
+      <app-social-share [url]="shareLink" *ngIf="currentStep.stepNumber == 5"></app-social-share>
+      <div *ngIf="currentStep.stepNumber == 5" class="preview-form label-share">Invite your friend by email:</div>
+      <invites *ngIf="currentStep.stepNumber == 5" [stack]="organizedProducts"></invites>
+    </ion-card-content>
+  </ion-card>
+
+  <!------ Stripe Connect step #1 ------>
+  <div id="stripe-connect" *ngIf="currentStep.stepNumber == 0">
+    <stripe-connect></stripe-connect>
+  </div>
+</ion-content>
+<ng-template #elseBlock>
+  <ion-content>
+    <div style="padding-left: 20px; padding-top: 20px;">
+      We are loading your information...
+    </div>
+  </ion-content>
+</ng-template>
+
+<!-- MINIMALISTIC EXAMPLE item reordering WITH SLIDING (BUT HAS A BUG) -->
+<!-- <ion-reorder-group disabled="false" (ionItemReorder)="reorderItems($event)">
+  <ion-item-sliding *ngFor="let item of items">
+    <ion-item>
+      <ion-label>
+        Item-{{item}}
+      </ion-label>
+      <ion-reorder></ion-reorder>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option color="danger" (click)="removeProductOnSwipe(product)">Remove</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-reorder-group> -->

@@ -1,0 +1,68 @@
+<div id="finalize-products">
+  <ion-grid>
+    <!--
+      <ion-button class="fp-btn danger" fill="solid" (click)="edit()" slot="start">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon> Edit
+      </ion-button>
+    -->
+    <ion-row class="ion-justify-content-end" style="padding-top: 0.5em;">
+      <ion-button class="green-btn" (click)="save()">Next</ion-button>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-xl="3" size-lg="2" size-md="2" size-sm="2" size="2" class="ion-text-center">Name</ion-col>
+      <ion-col size-xl="2" size-lg="2" size-md="2" size-sm="2" size="2" class="ion-text-center">Image</ion-col>
+      <ion-col size-xl="1" size-lg="1" size-md="2" size-sm="2" size="2" class="ion-text-center">Price</ion-col>
+      <ion-col size-xl="3" size-lg="4" size-md="2" size-sm="2" size="2" class="ion-text-center" *ngFor="let name of review.options">
+        {{ name }}
+      </ion-col>
+
+      <ion-list style="padding-top: 0.5em;width:100%;" no-lines>
+        <ion-item *ngFor="let product of review.products; let i = index">
+          <ion-row [ngClass]="{ 'even-row': i % 2 == 0, 'odd-row': i % 2 != 0 }">
+            <!-- Title -->
+            <ion-col class="ion-text-center" size-xl="3" size-lg="2" style="white-space: normal;">
+              <span *ngIf="review.stacksProducts.get(product.id).title">{{ review.stacksProducts.get(product.id).title }} </span>
+              <span *ngIf="!review.stacksProducts.get(product.id).title">{{ product.title }}</span>
+            </ion-col>
+
+            <!-- Images -->
+            <ion-col class="ion-text-center" size-xl="2" size-lg="2">
+              <div *ngFor="let image of product.images" style="display: inline; white-space:normal;">
+                <img src="{{ image.src }}" style="width: 30%;" imageViewer />
+              </div>
+            </ion-col>
+
+            <!-- Price -->
+            <ion-col class="ion-text-center" size-xl="1" size-lg="1">
+              {{ review.stacksProducts.get(product.id).price | currency: review.currency }}
+            </ion-col>
+
+            <!-- Other Variants  -->
+            <ion-col class="ion-text-center" size-xl="3" size-lg="4" *ngFor="let name of review.options">
+              <ion-row>
+                <ion-button
+                  fill="outline"
+                  *ngFor="let data of review.stacksProducts.get(product.id).variants.get(name)"
+                  class="size-btn"
+                  disabled
+                >
+                  <span>{{ data }}</span>
+                </ion-button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+
+    <!--
+      <ion-button class="fp-btn danger" fill="solid" (click)="edit()" slot="start">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon> Edit
+      </ion-button>
+      -->
+    <ion-row class="ion-justify-content-end" style="padding-top: 0.5em;">
+      <ion-button class="green-btn" (click)="save()">Next</ion-button>
+    </ion-row>
+  </ion-grid>
+</div>

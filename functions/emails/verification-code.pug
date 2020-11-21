@@ -1,0 +1,13 @@
+extends template-email
+
+block content
+
+  p Thank you for signing up for GetPaper. We're happy you're here!
+  p Enter the following code in the window where you began creating your new GetPaper stack:
+  p#code #{verificationCode}
+  p This email contains private information about your banana hammock — please do not forward. If you have any questions,	email us at
+    a(href='mailto:feedback@GetPaper.io')
+      span feedback@GetPaper.io
+
+  p Cheers,
+  p The team at GetPaper
